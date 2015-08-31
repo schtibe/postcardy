@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon --exec babel-node -- bin/app",
+    "test": "make test"
+  },
+  "dependencies": {
+    "babel": "^5.8.21",
+    "babel-runtime": "^5.8.20",
+    "body-parser": "^1.13.3",
+    "cors": "^2.7.1",
+    "debug": "^2.2.0",
+    "express": "^4.13.1",
+    "moment": "^2.10.6",
+    "morgan": "^1.6.1",
+    "multer": "^1.0.3",
+    "request": "^2.60.0",
+    "postcardcreator": "git+https://github.com/gido/postcardcreator.git"
+  },
+  "devDependencies": {
+    "babel-eslint": "^4.0.5",
+    "form-data": "^0.2.0",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.0.0",
+    "nodemon": "^1.4.0"
+  }
+}

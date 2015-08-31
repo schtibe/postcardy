@@ -1,0 +1,27 @@
+.uploadedImage {
+  width: 1024px;
+  height: 726px;
+}
+
+label {
+  display: inline-block;
+  width: 300px;
+  line-height: 2em;
+}
+
+input {
+  width: 500px;
+}
+
+textarea {
+  width: 500px;
+  height: 150px;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}

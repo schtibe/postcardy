@@ -1,0 +1,50 @@
+
+<h3>Image</h3>
+<div>
+{{file-uploader url="/api/v1/images" setImage=(action 'setImage')}}
+</div>
+
+<div>
+<img src={{imgURL}} class="uploadedImage">
+</div>
+
+
+<h3>Message</h3>
+<div>
+  <label>Message</label> {{textarea type="text" value=message}}
+</div>
+
+<h3>Recipient</h3>
+<div>
+  <label for="salutation">Salutation</label>
+  {{input id="salutation" type="text" value=salutation class="form-control"}}
+</div>
+<div>
+  <label>Given Name</label>
+  {{input type="text" value=givenName}}
+</div>
+<div>
+  <label>Family Name</label> {{input type="text" value=familyName}}
+</div>
+<div>
+  <label>Company</label> {{input type="text" value=company}}
+</div>
+<div>
+  <label>Street</label> {{input type="text" value=street}}
+</div>
+<div>
+  <label>Post Code</label> {{input type="text" value=postCode}}
+</div>
+<div>
+  <label>Place</label> {{input type="text" value=place}}
+</div>
+
+<div>
+  <label>&nbsp;</label>
+<button {{action 'send'}}>Send Postcard</button>
+</div>
+
+
+<div class="{{resultClass}}">
+  {{result}}
+</div>
