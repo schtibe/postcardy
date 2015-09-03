@@ -1,8 +1,14 @@
 import { Router } from 'express';
 import multer     from 'multer';
-var fs = require('fs')
+import moment     from 'moment';
+import jsonfile   from 'jsonfile';
 
-var config = require('../../../../config/postconfig.json')
+var fs = require('fs');
+
+var dataFile = __dirname + '/../../../../config/data.json';
+var configFile = __dirname + '/../../../../config/postconfig.json';
+
+var config = require(configFile);
 
 var path = require('path'),
     Postcardcreator = require('postcardcreator'),
@@ -10,12 +16,20 @@ var path = require('path'),
 
 var client = new Postcardcreator(config.username, config.password);
 
-let router = new Router
-export default router
-
+let router = new Router;
+export default router;
 
 router.post('/postcards',  (req, res, next) => {
+  var data = jsonfile.readFileSync(dataFile);
+
   try {
+    if (data.lastOrder) {
+      var lastOrder = moment(data.lastOrder);
+
+      if (moment().subtract(1, 'day').isBefore(lastOrder)) {
+        throw new Error("The last order is less than 24hrs ago (" + lastOrder.format() + ")");
+      }
+    }
 
     if (req.body.imgURL == '') {
       throw Error("No image given");
@@ -36,26 +50,27 @@ router.post('/postcards',  (req, res, next) => {
       place      : req.body.place
     };
 
-    //var postcard = new Postcard(assetStream, message, recipient);
+    var postcard = new Postcard(assetStream, message, recipient);
 
     console.log("Sending postcard")
-    /*
-       client.sendPostcard(postcard, function(err, result) {
-       if (err) {
-       console.log("Error when sending the postcard. ", err);
-       handleError(err);
-       return;
-       }
+    client.sendPostcard(postcard, function(err, result) {
+      if (err) {
+        console.log("Error when sending the postcard. ", err);
+        handleError(err);
+        return;
+      }
 
-       console.log("Postcard sent with success !");
-       console.log(result);
-       });
-       */
+      console.log("Postcard sent with success !");
+      console.log(result);
+      res.json({ type: 'success', message: 'Sent!' });
+    });
 
-    res.json({ type: 'success', message: 'Sent!' });
+    data.lastOrder = moment();
+    jsonfile.writeFileSync(dataFile, data);
+
   }
   catch (ex) {
     res.json({ type: 'error', message: ex.message });
   }
-})
+});
 
