@@ -40,7 +40,7 @@ export default Ember.Component.extend({
           this.set('resultClass', res.type);
         },
         error: (err) => {
-          this.set('resultClass', 'error')
+          this.set('resultClass', 'error');
           this.set('result', "Error requesting the order: " + err);
         }
       });

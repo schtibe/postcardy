@@ -12,7 +12,7 @@ export default EmberUploader.FileField.extend({
     });
 
     uploader.on('didUpload', (e) => {
-      this.sendAction("setImage", e.image)
+      this.sendAction("setImage", e.image);
     });
 
     if (!Ember.isEmpty(files)) {
