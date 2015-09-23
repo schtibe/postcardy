@@ -1,3 +1,8 @@
+<form>
+
+<div class="alert alert-{{resultClass}}">
+  {{result}}
+</div>
 
 <h3>Image</h3>
 <div>
@@ -11,40 +16,75 @@
 
 <h3>Message</h3>
 <div>
-  <label>Message</label> {{textarea type="text" value=message}}
+  <label>Message</label> {{textarea type="text" value=message class="form-control"}}
 </div>
 
 <h3>Recipient</h3>
-<div>
-  <label for="salutation">Salutation</label>
-  {{input id="salutation" type="text" value=salutation class="form-control"}}
-</div>
-<div>
-  <label>Given Name</label>
-  {{input type="text" value=givenName}}
-</div>
-<div>
-  <label>Family Name</label> {{input type="text" value=familyName}}
-</div>
-<div>
-  <label>Company</label> {{input type="text" value=company}}
-</div>
-<div>
-  <label>Street</label> {{input type="text" value=street}}
-</div>
-<div>
-  <label>Post Code</label> {{input type="text" value=postCode}}
-</div>
-<div>
-  <label>Place</label> {{input type="text" value=place}}
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label>Company</label>
+      {{input type="text" value=company class="form-control"}}
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="salutation">Salutation</label>
+      {{input id="salutation" type="text" value=salutation class="form-control"}}
+    </div>
+  </div>
 </div>
 
-<div>
-  <label>&nbsp;</label>
-<button {{action 'send'}}>Send Postcard</button>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label>Given Name</label>
+      {{input type="text" value=givenName class="form-control"}}
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label>Family Name</label>
+      {{input type="text" value=familyName class="form-control"}}
+    </div>
+  </div>
 </div>
 
-
-<div class="{{resultClass}}">
-  {{result}}
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label>Street</label>
+      {{input type="text" value=street class="form-control"}}
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <label>Post Code</label>
+      {{input type="text" value=postCode class="form-control"}}
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Place</label>
+      {{input type="text" value=place class="form-control"}}
+    </div>
+  </div>
 </div>
+
+<div class="row">
+  <div class="form-group">
+    <label>&nbsp;</label>
+    <button {{action 'send'}}
+       class="btn" disabled="{{if sent "disabled"}}">Send Postcard</button>
+    <button {{action 'reset'}}
+        class="btn"  disabled="{{unless sent "disabled"}}">Reset</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="alert alert-{{resultClass}}">
+    {{result}}
+  </div>
+</div>
+</form>
+

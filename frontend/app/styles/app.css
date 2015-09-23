@@ -12,25 +12,8 @@
   display: none;
 }
 
-label {
-  display: inline-block;
-  width: 300px;
-  line-height: 2em;
-}
-
-input {
-  width: 500px;
-}
-
-textarea {
-  width: 500px;
-  height: 150px;
-}
-
-.success {
-  color: green;
-}
-
-.error {
-  color: red;
+.full-width {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
 }

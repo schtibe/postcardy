@@ -70,7 +70,7 @@ router.post('/postcards',  (req, res, next) => {
 
   }
   catch (ex) {
-    res.json({ type: 'error', message: ex.message });
+    res.json({ type: 'warning', message: ex.message });
   }
 });
 
