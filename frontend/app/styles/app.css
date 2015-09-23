@@ -1,6 +1,15 @@
-.uploadedImage {
+.imageBig {
   width: 1024px;
   height: 726px;
+}
+
+.imageSmall {
+  width: 341px;
+  height: 242px;
+}
+
+.imageNone {
+  display: none;
 }
 
 label {

@@ -1,20 +1,30 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  imgURL: '',
-  message: '',
-  salutation: 'Herr',
-  givenName: 'Stefan',
-  familyName: 'Heinemann',
-  company: '',
-  street: 'hintere Strasse 24',
-  postCode: '3284',
-  place: 'Fräschels',
-  result: '',
-  resultClass: '',
-  actions: {
+  imgURL      : '',
+  imgClass    : 'imageNone',
+  message     : '',
+  salutation  : 'Herr',
+  givenName   : 'Stefan',
+  familyName  : 'Heinemann',
+  company     : '',
+  street      : 'hintere Strasse 24',
+  postCode    : '3284',
+  place       : 'Fräschels',
+  result      : '',
+  resultClass : '',
+  actions     : {
     setImage: function(image) {
       this.set('imgURL', image);
+      this.set('imgClass', 'imageSmall');
+    },
+    click: function() {
+      if (this.get('imgClass') == 'imageSmall') {
+        this.set('imgClass', 'imageBig');
+      }
+      else {
+        this.set('imgClass', 'imageSmall');
+      }
     },
     send: function() {
       console.log("Sending data");
