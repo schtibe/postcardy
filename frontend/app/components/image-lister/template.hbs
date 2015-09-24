@@ -1,0 +1,8 @@
+
+{{#each images as |image|}}
+<div class="row">
+  <div class="col-lg-12">
+    <img src="{{image}}" class="sent_image" {{action "chosePic" image }} />
+  </div>
+</div>
+{{/each}}
