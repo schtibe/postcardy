@@ -27,3 +27,19 @@
   text-align: center;
   margin: 5px 0px;
 }
+
+img-slider-container {
+  position: relative;
+}
+
+.buttonbar {
+  position: absolute;
+  left: 25px;
+  bottom: 25px;
+  color: white;
+  background-color: rgba(0,0,0, 0.5);
+}
+
+.buttonbar a {
+  color: white;
+}

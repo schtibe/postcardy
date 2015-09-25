@@ -34,6 +34,17 @@ export default Ember.Component.extend({
     down: function(image) {
       this.set('from' , this.get('from') + 1);
       this.set('to'   , this.get('to')   + 1);
+    },
+    deleteImage: function(image) {
+      Ember.$.ajax({
+        url: '/api/v1/images',
+        type: 'DELETE',
+        data: { image: image },
+        success: () => {
+          this.getImages();
+          this.disableTo();
+        }
+      })
     }
   },
   disableTo: function() {
