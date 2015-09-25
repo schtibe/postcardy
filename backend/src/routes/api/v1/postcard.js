@@ -19,16 +19,28 @@ var client = new Postcardcreator(config.username, config.password);
 let router = new Router;
 export default router;
 
-router.post('/postcards',  (req, res, next) => {
+function isOneDayAgo() {
   var data = jsonfile.readFileSync(dataFile);
 
-  try {
-    if (data.lastOrder) {
-      var lastOrder = moment(data.lastOrder);
+  if (data.lastOrder) {
+    var lastOrder = moment(data.lastOrder);
 
-      if (moment().subtract(1, 'day').isBefore(lastOrder)) {
-        throw new Error("The last order is less than 24hrs ago (" + lastOrder.format() + ")");
-      }
+    if (moment().subtract(1, 'day').isBefore(lastOrder)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+router.post('/postcards',  (req, res, next) => {
+
+  res.json({ type: 'success', message: 'Sent!' });
+  return;
+
+  try {
+    if (isOneDayAgo()) {
+      throw new Error("The last order is less than 24hrs ago (" + lastOrder.format() + ")");
     }
 
     if (req.body.imgURL == '') {
@@ -65,6 +77,7 @@ router.post('/postcards',  (req, res, next) => {
       res.json({ type: 'success', message: 'Sent!' });
     });
 
+    var data = jsonfile.readFileSync(dataFile);
     data.lastOrder = moment();
     jsonfile.writeFileSync(dataFile, data);
 
@@ -74,3 +87,7 @@ router.post('/postcards',  (req, res, next) => {
   }
 });
 
+
+router.get('/postcards/last',  (req, res, next) => {
+  res.json({ isOneDayAgo: isOneDayAgo() });
+});

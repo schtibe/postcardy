@@ -74,9 +74,7 @@
     <div class="form-group">
       <label>&nbsp;</label>
       <button {{action 'send'}}
-         class="btn" disabled="{{if sent "disabled"}}">Send Postcard</button>
-      <button {{action 'reset'}}
-          class="btn"  disabled="{{unless sent "disabled"}}">Reset</button>
+         class="btn" disabled="{{if disabled "disabled"}}">Send Postcard</button>
     </div>
   </div>
 

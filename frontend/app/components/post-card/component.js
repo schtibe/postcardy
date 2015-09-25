@@ -13,7 +13,8 @@ export default Ember.Component.extend({
   place       : 'Fräschels',
   result      : '',
   resultClass : '',
-  sent        : false,
+  disabled    : false,
+  receiver    : null,
   actions     : {
     setImage: function(image) {
       this.set('imgURL', image);
@@ -60,5 +61,16 @@ export default Ember.Component.extend({
   },
   imageIsSet: function() {
     this.set('imgClass', 'imageSmall');
-  }.observes('imgURL')
+  }.observes('imgURL'),
+  initialise: function() {
+    Ember.$.ajax({
+      url: '/api/v1/postcards/last',
+      type: 'GET',
+      success: (res) => {
+        if (!res.isOneDayAgo) {
+          this.set('disabled', true);
+        }
+      }
+    })
+  }.on('didInsertElement')
 });
