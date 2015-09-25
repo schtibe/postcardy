@@ -58,9 +58,24 @@ export default Ember.Component.extend({
         }
       });
     },
+    deleteImage: function() {
+      Ember.$.ajax({
+        url: '/api/v1/images',
+        type: 'DELETE',
+        data: { image: this.get('imgURL') },
+        success: () => {
+          this.set('imgURL', null);
+        }
+      })
+    }
   },
   imageIsSet: function() {
-    this.set('imgClass', 'imageSmall');
+    if (this.get('imgURL') == null) {
+      this.set('imgClass', 'imageNone');
+    }
+    else {
+      this.set('imgClass', 'imageSmall');
+    }
   }.observes('imgURL'),
   initialise: function() {
     Ember.$.ajax({

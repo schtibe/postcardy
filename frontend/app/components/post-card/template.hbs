@@ -5,11 +5,16 @@
 
   <h3>Image</h3>
   <div>
-  {{file-uploader url="/api/v1/images" setImage=(action 'setImage')}}
+  {{file-uploader url="/api/v1/images" setImage=(action "setImage")}}
   </div>
 
-  <div>
-    <img id="chosenImage" src={{imgURL}} class="{{imgClass}}" {{action 'click'}} >
+  <div class="{{imgClass}}">
+    <div>
+      <img id="chosenImage" src={{imgURL}} {{action 'click'}} >
+    </div>
+    <div>
+      <button {{action "deleteImage"}}>Delete image</button>
+    </div>
   </div>
 
 

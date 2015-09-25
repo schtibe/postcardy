@@ -30,3 +30,10 @@ router.get('/images', (req, res, next) => {
   }).slice(0, 5);
   res.json({ files });
 })
+
+router.delete('/images', (req, res, next) => {
+  console.log(res)
+  var image = req.body.image
+  fs.unlink(image);
+  res.json({ result: 'success' })
+})
