@@ -50,7 +50,7 @@ export default Ember.Component.extend({
         success: (res) => {
           this.set('result', res.message);
           this.set('resultClass', res.type);
-          this.set('sent', true);
+          this.set('disabled', true);
         },
         error: (err) => {
           this.set('resultClass', 'error');

@@ -34,10 +34,6 @@ function isOneDayAgo() {
 }
 
 router.post('/postcards',  (req, res, next) => {
-
-  res.json({ type: 'success', message: 'Sent!' });
-  return;
-
   try {
     if (isOneDayAgo()) {
       throw new Error("The last order is less than 24hrs ago (" + lastOrder.format() + ")");
