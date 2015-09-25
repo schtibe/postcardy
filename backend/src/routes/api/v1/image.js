@@ -27,6 +27,6 @@ router.get('/images', (req, res, next) => {
   var files = fs.readdirSync(UPLOAD_LOCATION).sort().reverse()
   files = files.map(function(currentVal) {
     return UPLOAD_LOCATION + currentVal;
-  })
+  }).slice(0, 5);
   res.json({ files });
 })

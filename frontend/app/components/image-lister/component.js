@@ -8,7 +8,6 @@ export default Ember.Component.extend({
       url: '/api/v1/images',
       type: 'GET',
       success: (res) => {
-        console.log(res)
         this.set('images', res.files)
       }
     })

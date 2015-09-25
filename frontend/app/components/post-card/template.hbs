@@ -1,89 +1,87 @@
 <form>
+  <div class="alert alert-{{resultClass}}">
+    {{result}}
+  </div>
 
-<div class="alert alert-{{resultClass}}">
-  {{result}}
-</div>
+  <h3>Image</h3>
+  <div>
+  {{file-uploader url="/api/v1/images" setImage=(action 'setImage')}}
+  </div>
 
-<h3>Image</h3>
-<div>
-{{file-uploader url="/api/v1/images" setImage=(action 'setImage')}}
-</div>
-
-<div>
-  <img src={{imgURL}} class="{{imgClass}}" {{action 'click'}}>
-</div>
+  <div>
+    <img id="chosenImage" src={{imgURL}} class="{{imgClass}}" {{action 'click'}} >
+  </div>
 
 
-<h3>Message</h3>
-<div>
-  <label>Message</label> {{textarea type="text" value=message class="form-control"}}
-</div>
+  <h3>Message</h3>
+  <div>
+    <label>Message</label> {{textarea type="text" value=message class="form-control"}}
+  </div>
 
-<h3>Recipient</h3>
-<div class="row">
-  <div class="col-md-6">
-    <div class="form-group">
-      <label>Company</label>
-      {{input type="text" value=company class="form-control"}}
+  <h3>Recipient</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Company</label>
+        {{input type="text" value=company class="form-control"}}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="salutation">Salutation</label>
+        {{input id="salutation" type="text" value=salutation class="form-control"}}
+      </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="form-group">
-      <label for="salutation">Salutation</label>
-      {{input id="salutation" type="text" value=salutation class="form-control"}}
-    </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="form-group">
-      <label>Given Name</label>
-      {{input type="text" value=givenName class="form-control"}}
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Given Name</label>
+        {{input type="text" value=givenName class="form-control"}}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Family Name</label>
+        {{input type="text" value=familyName class="form-control"}}
+      </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="form-group">
-      <label>Family Name</label>
-      {{input type="text" value=familyName class="form-control"}}
-    </div>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="form-group">
-      <label>Street</label>
-      {{input type="text" value=street class="form-control"}}
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Street</label>
+        {{input type="text" value=street class="form-control"}}
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Post Code</label>
+        {{input type="text" value=postCode class="form-control"}}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Place</label>
+        {{input type="text" value=place class="form-control"}}
+      </div>
     </div>
   </div>
-  <div class="col-md-2">
+
+  <div class="row">
     <div class="form-group">
-      <label>Post Code</label>
-      {{input type="text" value=postCode class="form-control"}}
+      <label>&nbsp;</label>
+      <button {{action 'send'}}
+         class="btn" disabled="{{if sent "disabled"}}">Send Postcard</button>
+      <button {{action 'reset'}}
+          class="btn"  disabled="{{unless sent "disabled"}}">Reset</button>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="form-group">
-      <label>Place</label>
-      {{input type="text" value=place class="form-control"}}
-    </div>
+
+  <div class="alert alert-{{resultClass}}">
+    {{result}}
   </div>
-</div>
-
-<div class="row">
-  <div class="form-group">
-    <label>&nbsp;</label>
-    <button {{action 'send'}}
-       class="btn" disabled="{{if sent "disabled"}}">Send Postcard</button>
-    <button {{action 'reset'}}
-        class="btn"  disabled="{{unless sent "disabled"}}">Reset</button>
-  </div>
-</div>
-
-<div class="alert alert-{{resultClass}}">
-  {{result}}
-</div>
-
 </form>
 
