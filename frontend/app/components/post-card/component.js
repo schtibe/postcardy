@@ -58,4 +58,7 @@ export default Ember.Component.extend({
       });
     },
   },
+  imageIsSet: function() {
+    this.set('imgClass', 'imageSmall');
+  }.observes('imgURL')
 });

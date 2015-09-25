@@ -12,4 +12,9 @@ export default Ember.Component.extend({
       }
     })
   }.on('didInsertElement'),
+  actions: {
+    choosePic: function(image) {
+      this.sendAction('bubbleImage', image);
+    }
+  }
 })
