@@ -34,9 +34,17 @@ function isOneDayAgo() {
 }
 
 router.post('/postcards',  (req, res, next) => {
+  var data = jsonfile.readFileSync(dataFile);
+
   try {
-    if (isOneDayAgo()) {
-      throw new Error("The last order is less than 24hrs ago (" + lastOrder.format() + ")");
+
+    if (data.lastOrder) {
+      var lastOrder = moment(data.lastOrder);
+
+      // TODO refactor: use the function maybe
+      if (moment().subtract(1, 'day').isBefore(lastOrder)) {
+        throw new Error("The last order is less than 24hrs ago (" + lastOrder.format() + ")");
+      }
     }
 
     if (req.body.imgURL == '') {

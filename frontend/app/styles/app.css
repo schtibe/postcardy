@@ -21,3 +21,9 @@
   width: 100%;
   margin-bottom: 15px;
 }
+
+.slider-button {
+  width: 100%;
+  text-align: center;
+  margin: 5px 0px;
+}

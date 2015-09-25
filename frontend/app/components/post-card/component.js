@@ -78,6 +78,7 @@ export default Ember.Component.extend({
     }
   }.observes('imgURL'),
   initialise: function() {
+
     Ember.$.ajax({
       url: '/api/v1/postcards/last',
       type: 'GET',

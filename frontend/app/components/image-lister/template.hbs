@@ -1,4 +1,8 @@
 
+
+<button class="btn slider-button" {{action 'up'}}
+  disabled="{{unless from "disabled" ""}}">Up</button>
+
 {{#each images as |image|}}
 <div class="row">
   <div class="col-lg-12">
@@ -6,3 +10,6 @@
   </div>
 </div>
 {{/each}}
+
+
+<button class="btn slider-button" {{action 'down'}} id="downBtn">Down</button>
