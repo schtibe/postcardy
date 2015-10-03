@@ -2,6 +2,8 @@ import { Router } from 'express'
 import multer     from 'multer'
 import fs         from 'fs'
 
+import easyimage  from 'easyimage'
+
 const UPLOAD_LOCATION = 'uploads/';
 
 var storage  = multer.diskStorage({
@@ -20,6 +22,16 @@ export default router
 
 
 router.post('/images', upload.single('image'), (req, res, next) => {
+
+  var dsPath = req.file.path + '.thumb';
+
+  easyimage.resize({
+    src: req.file.path,
+    dst: dstPath,
+    width: 341,
+    height: 241
+  });
+
   res.json({image: req.file.path})
 })
 
