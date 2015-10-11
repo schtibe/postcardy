@@ -16,12 +16,15 @@ export default Ember.Component.extend({
   disabled    : false,
   receiver    : null,
   actions     : {
+    uploading: function() {
+      console.log("UPLOADING, SET PROGRESS");
+    },
     setImage: function(image) {
       this.set('imgURL', image);
       this.set('imgClass', 'imageSmall');
     },
     click: function() {
-      if (this.get('imgClass') == 'imageSmall') {
+      if (this.get('imgClass') === 'imageSmall') {
         this.set('imgClass', 'imageBig');
       }
       else {
@@ -66,7 +69,7 @@ export default Ember.Component.extend({
         success: () => {
           this.set('imgURL', null);
         }
-      })
+      });
     }
   },
   imageIsSet: function() {
@@ -87,6 +90,6 @@ export default Ember.Component.extend({
           this.set('disabled', true);
         }
       }
-    })
+    });
   }.on('didInsertElement')
 });

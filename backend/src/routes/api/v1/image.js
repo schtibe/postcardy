@@ -25,12 +25,14 @@ router.post('/images', upload.single('image'), (req, res, next) => {
 
   var dsPath = req.file.path + '.thumb';
 
+  /*
   easyimage.resize({
     src: req.file.path,
     dst: dstPath,
     width: 341,
     height: 241
   });
+  */
 
   res.json({image: req.file.path})
 })

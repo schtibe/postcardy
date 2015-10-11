@@ -10,9 +10,7 @@ export default Ember.Component.extend({
       to:   this.get('to')
     };
 
-    var self = this;
-
-    $.ajax({
+    Ember.$.ajax({
       url: '/api/v1/images',
       type: 'GET',
       data: data,
@@ -20,18 +18,18 @@ export default Ember.Component.extend({
         this.set('images', res.files);
         this.set('max',    res.max);
       }
-    })
+    });
 
   }.on('didInsertElement').observes('to'),
   actions: {
     choosePic: function(image) {
       this.sendAction('bubbleImage', image);
     },
-    up: function(image) {
+    up: function() {
       this.set('from' , this.get('from') - 1);
       this.set('to'   , this.get('to')   - 1);
     },
-    down: function(image) {
+    down: function() {
       this.set('from' , this.get('from') + 1);
       this.set('to'   , this.get('to')   + 1);
     },
@@ -44,7 +42,7 @@ export default Ember.Component.extend({
           this.getImages();
           this.disableTo();
         }
-      })
+      });
     }
   },
   disableTo: function() {
@@ -55,4 +53,4 @@ export default Ember.Component.extend({
       Ember.$('#downBtn').prop('disabled', false);
     }
   }.observes('to')
-})
+});
