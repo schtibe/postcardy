@@ -7,6 +7,8 @@ export default EmberUploader.FileField.extend({
   filesDidChange: function(files) {
     var uploadUrl = this.get('url');
 
+    this.sendAction("uploading");
+
     var uploader = EmberUploader.Uploader.create({
       paramName: 'image',
       url: uploadUrl

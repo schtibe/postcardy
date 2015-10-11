@@ -6,7 +6,7 @@
   <h3>Image</h3>
   <div>
     {{file-uploader url="/api/v1/images" setImage=(action "setImage") uploading=(action "uploading") }}
-    <progress style="display: {{upload-progress}}" />
+    <progress style="display: {{uploadprogress}}" />
   </div>
 
   <div class="{{imgClass}}">

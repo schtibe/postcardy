@@ -1,27 +1,29 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  imgURL      : '',
-  imgClass    : 'imageNone',
-  message     : '',
-  salutation  : 'Herr',
-  givenName   : 'Stefan',
-  familyName  : 'Heinemann',
-  company     : '',
-  street      : 'hintere Strasse 24',
-  postCode    : '3284',
-  place       : 'Fräschels',
-  result      : '',
-  resultClass : '',
-  disabled    : false,
-  receiver    : null,
+  imgURL         : '',
+  imgClass       : 'imageNone',
+  message        : '',
+  salutation     : 'Herr',
+  givenName      : 'Stefan',
+  familyName     : 'Heinemann',
+  company        : '',
+  street         : 'hintere Strasse 24',
+  postCode       : '3284',
+  place          : 'Fräschels',
+  result         : '',
+  resultClass    : '',
+  disabled       : false,
+  receiver       : null,
+  uploadprogress : 'none',
   actions     : {
     uploading: function() {
-      console.log("UPLOADING, SET PROGRESS");
+      this.set('uploadprogress', 'block');
     },
     setImage: function(image) {
       this.set('imgURL', image);
       this.set('imgClass', 'imageSmall');
+      this.set('uploadprogress', 'none');;
     },
     click: function() {
       if (this.get('imgClass') === 'imageSmall') {
