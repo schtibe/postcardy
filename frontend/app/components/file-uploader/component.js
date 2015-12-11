@@ -4,7 +4,7 @@ import EmberUploader from 'ember-uploader'
 export default EmberUploader.FileField.extend({
   url: '',
   class: 'small',
-  filesDidChange: function(files) {
+  filesDidChange(files) {
     let uploadUrl = this.get('url')
 
     this.sendAction('uploading')
@@ -14,7 +14,7 @@ export default EmberUploader.FileField.extend({
       url: uploadUrl
     })
 
-    uploader.on('didUpload', (e) => {
+    uploader.on('didUpload', e => {
       this.sendAction('setImage', e.image)
     })
 
