@@ -1,56 +1,62 @@
-import Ember from 'ember';
+import Ember from 'ember'
+
+import { on, observes } from 'ember-computed-decorators'
 
 export default Ember.Component.extend({
   images: [],
-  from: 0,
-  to: 3,
-  getImages: function () {
+  from:    0,
+  to:      3,
+  @on('didInsertElement')
+  @observes('to')
+  getImages () {
     var data = {
       from: this.get('from'),
       to:   this.get('to')
-    };
+    }
 
     Ember.$.ajax({
       url: '/api/v1/images',
       type: 'GET',
       data: data,
       success: (res) => {
-        this.set('images', res.files);
-        this.set('max',    res.max);
+        this.set('images', res.files)
+        this.set('max',    res.max)
       }
-    });
+    })
 
-  }.on('didInsertElement').observes('to'),
+  },
   actions: {
-    choosePic: function(image) {
-      this.sendAction('bubbleImage', image);
+    choosePic(image) {
+      this.sendAction('bubbleImage', image)
     },
-    up: function() {
-      this.set('from' , this.get('from') - 1);
-      this.set('to'   , this.get('to')   - 1);
+    up() {
+      this.set('from' , this.get('from') - 1)
+      this.set('to'   , this.get('to')   - 1)
     },
-    down: function() {
-      this.set('from' , this.get('from') + 1);
-      this.set('to'   , this.get('to')   + 1);
+    down() {
+      this.set('from' , this.get('from') + 1)
+      this.set('to'   , this.get('to')   + 1)
     },
-    deleteImage: function(image) {
+    deleteImage(image) {
       Ember.$.ajax({
         url: '/api/v1/images',
         type: 'DELETE',
         data: { image: image },
         success: () => {
-          this.getImages();
-          this.disableTo();
+          this.getImages()
+          this.disableTo()
         }
-      });
+      })
     }
   },
-  disableTo: function() {
+  @observes('on')
+  disableTo() {
     if (this.get('to') + 1 > this.get('max')) {
-      Ember.$('#downBtn').prop('disabled', true);
+      Ember.$('#downBtn').prop('disabled', true)
     }
     else {
-      Ember.$('#downBtn').prop('disabled', false);
+      Ember.$('#downBtn').prop('disabled', false)
     }
-  }.observes('to')
-});
+  }
+})
+
