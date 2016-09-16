@@ -19,6 +19,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "babel-eslint": "^6.0.2",
     "broccoli-asset-rev": "^2.1.2",
     "copy-dereference": "^1.0.0",
     "ember-cli": "1.13.8",
@@ -39,6 +40,7 @@
     "ember-data": "1.13.8",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3",
+    "eslint": "^2.6.0",
     "postcss-responsive-type": "^0.3.2"
   }
 }

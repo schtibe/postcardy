@@ -28,6 +28,9 @@ module.exports = function(defaults) {
         'es6.constants',
         'es6.templateLiterals'
       ]
+    },
+    'ember-cli-qunit': {
+        useLintTree: false
     }
   })
 
