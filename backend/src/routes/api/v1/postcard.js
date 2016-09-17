@@ -40,7 +40,6 @@ router.post('/postcards',  (req, res, next) => {
 
   try {
 
-    /*
     if (data.lastOrder) {
       let lastOrder = moment(data.lastOrder);
 
@@ -49,7 +48,6 @@ router.post('/postcards',  (req, res, next) => {
         throw new Error("The last order is less than 24hrs ago (" + lastOrder.format() + ")");
       }
     }
-    */
 
     if (req.body.imgURL == '') {
       throw Error("No image given");
