@@ -18,26 +18,11 @@ let SSOHelper = new SSOPostHelper()
 let router = express.Router();
 export default router;
 
-function isOneDayAgo() {
-  return true;
-  let data = jsonfile.readFileSync(dataFile);
-
-  if (data.lastOrder) {
-    let lastOrder = moment(data.lastOrder);
-
-    if (moment().subtract(1, 'day').isBefore(lastOrder)) {
-      return false;
-    }
-  }
-
-  return true;
-}
 
 router.post('/postcards',  (req, res, next) => {
   let data = jsonfile.readFileSync(dataFile);
 
   try {
-
     if (data.lastOrder) {
       let lastOrder = moment(data.lastOrder);
 
@@ -106,5 +91,17 @@ router.post('/postcards',  (req, res, next) => {
 
 
 router.get('/postcards/last',  (req, res, next) => {
-  res.json({ isOneDayAgo: isOneDayAgo() });
+  let isOneDayAgo = True;
+
+  let data = jsonfile.readFileSync(dataFile);
+
+  if (data.lastOrder) {
+    let lastOrder = moment(data.lastOrder);
+
+    if (moment().subtract(1, 'day').isBefore(lastOrder)) {
+      return false;
+    }
+  }
+
+  res.json({ isOneDayAgo });
 });
