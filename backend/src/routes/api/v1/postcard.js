@@ -1,21 +1,19 @@
-let express = require('express')
-let multer = require('multer')
-let moment = require('moment')
-let jsonfile = require('jsonfile')
-let fs = require('fs')
+import express from 'express'
+import multer from 'multer'
+import moment from 'moment'
+import jsonfile from 'jsonfile'
+import fs from 'fs'
 
 let dataFile = __dirname + '/../../../../config/data.json';
 let configFile = __dirname + '/../../../../config/postconfig.json';
 
 let config = require(configFile)
 
-let path = require('path'),
-    Postcardcreator = require('postcardcreator'),
-    SSOPostHelper = require('postcardcreator/lib/helper/SSOPostHelper'),
-    Postcard = Postcardcreator.Postcard;
+import path from 'path'
+import { Postcardcreator, Postcard } from 'postcardcreator'
+import SSOPostHelper from 'postcardcreator/lib/helper/SSOPostHelper'
 
 let SSOHelper = new SSOPostHelper()
-
 
 let router = express.Router();
 export default router;
