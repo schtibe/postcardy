@@ -18,17 +18,6 @@ let config = require(configFile)
     let data = jsonfile.readFileSync(dataFile);
 
     try {
-      /*
-      if (data.lastOrder) {
-        let lastOrder = moment(data.lastOrder);
-
-        // TODO refactor: use the function maybe
-        if (moment().subtract(1, 'day').isBefore(lastOrder)) {
-          throw new Error("The last order is less than 24hrs ago (" + lastOrder.format() + ")");
-        }
-      }
-      */
-
       if (req.body.imgURL == '') {
         throw Error("No image given");
       }
@@ -64,23 +53,15 @@ let config = require(configFile)
       )
     }
     catch (ex) {
-      res.json({ type: 'warning', message: ex.message });
+      res.json({ type: 'error', message: ex.message });
     }
   });
 
 
 router.get('/postcards/last',  (req, res, next) => {
   let isOneDayAgo = true;
-
   let data = jsonfile.readFileSync(dataFile);
+  let lastOrder = moment(data.lastOrder);
 
-  if (data.lastOrder) {
-    let lastOrder = moment(data.lastOrder);
-
-    if (moment().subtract(1, 'day').isBefore(lastOrder)) {
-      return false;
-    }
-  }
-
-  res.json({ isOneDayAgo });
+  res.json({ lastOrder });
 });

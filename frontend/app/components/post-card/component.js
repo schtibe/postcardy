@@ -19,6 +19,7 @@ export default Ember.Component.extend({
   receiver        : null,
   uploadprogress  : 'none',
   sendingprogress : 'none',
+  lastOrder       : '',
   actions     : {
     uploading() {
       this.set('uploadprogress', 'block')
@@ -93,9 +94,7 @@ export default Ember.Component.extend({
       url: '/api/v1/postcards/last',
       type: 'GET',
       success: (res) => {
-        if (!res.isOneDayAgo) {
-          this.set('disabled', true)
-        }
+        this.set('lastOrder', res.lastOrder)
       }
     })
   }

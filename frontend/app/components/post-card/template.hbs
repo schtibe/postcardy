@@ -79,6 +79,13 @@
   <div class="row">
     <div class="form-group">
       <label>&nbsp;</label>
+      Your last order was on {{moment-format lastOrder 'DD.MM.YYYY HH:mm'}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label>&nbsp;</label>
       <button {{action 'send'}}
          class="btn" disabled="{{if disabled "disabled"}}">Send Postcard</button>
       <progress style="display: {{sendingprogress}}" />
