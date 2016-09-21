@@ -1,8 +1,8 @@
-import { Router } from 'express'
-import multer     from 'multer'
-import fs         from 'fs'
+let express   = require('express')
+let multer    = require('multer')
+let fs        = require('fs')
 
-import easyimage  from 'easyimage'
+let easyimage = require('easyimage')
 
 const UPLOAD_LOCATION = 'uploads/';
 
@@ -17,7 +17,7 @@ var storage  = multer.diskStorage({
 
 let upload = multer({ storage })
 
-let router = new Router
+let router = new express.Router
 export default router
 
 

@@ -1,6 +1,6 @@
-import app   from '../src/app'
-import http  from 'http'
-import debug from 'debug'
+let app   = require('../src/app')
+let http  = require('http')
+let debug = require('debug')
 
 const port = process.env.PORT || '3000'
 

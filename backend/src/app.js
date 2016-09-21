@@ -1,10 +1,10 @@
 /* global require */
-import express    from 'express'
-import path       from 'path'
-import routes     from './routes'
-import morgan     from 'morgan'
-import bodyParser from 'body-parser'
-import cors       from 'cors'
+let express    = require('express')
+let path       = require('path')
+let routes     = require('./routes')
+let morgan     = require('morgan')
+let bodyParser = require('body-parser')
+let cors       = require('cors')
 
 let app = express()
 export default app

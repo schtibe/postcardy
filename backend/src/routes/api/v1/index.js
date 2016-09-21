@@ -1,6 +1,6 @@
-import { Router } from 'express'
+let express = require('express')
 
-let router = new Router
+let router = new express.Router
 export default router
 
 router.use(require('./image'))
