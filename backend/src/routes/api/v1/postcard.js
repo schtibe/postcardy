@@ -59,7 +59,6 @@ let config = require(configFile)
 
 
 router.get('/postcards/last',  (req, res, next) => {
-  let isOneDayAgo = true;
   let data = jsonfile.readFileSync(dataFile);
   let lastOrder = moment(data.lastOrder);
 
