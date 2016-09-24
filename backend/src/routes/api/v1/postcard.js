@@ -2,9 +2,8 @@ let express = require('express')
 let multer = require('multer')
 let moment = require('moment')
 let jsonfile = require('jsonfile')
-let fs = require('fs')
-let path = require('path')
 let sendPostcard = require('../../../lib/postcard')
+let image = require('../../../lib/image')
 
 let dataFile = `${__dirname}/../../../../config/data.json`
 let configFile = `${__dirname}/../../../../config/postconfig.json`
@@ -12,7 +11,6 @@ let configFile = `${__dirname}/../../../../config/postconfig.json`
 let config = require(configFile)
 
 let router = new express.Router()
-export default router
 
 router.post('/postcards',  (req, res, next) => {
   let data = jsonfile.readFileSync(dataFile)
@@ -23,8 +21,7 @@ router.post('/postcards',  (req, res, next) => {
     }
 
     let message = req.body.message
-    let imgPath = path.join(__dirname, '../../../../', req.body.imgURL)
-    let assetStream = fs.createReadStream(imgPath)
+    let imageStream = image.readImage(req.body.imgURL)
 
     let recipient = {
       salutation : req.body.salutation,
@@ -40,11 +37,14 @@ router.post('/postcards',  (req, res, next) => {
       config.username,
       config.password,
       recipient,
-      assetStream,
+      imageStream,
       message,
       {
         success: (result) => {
           res.json({ type: 'success', message: 'Sent!' })
+
+          data.lastOrder = moment()
+          jsonfile.writeFileSync(dataFile, data)
         },
         error: (error) => {
           res.json({ type: 'error', message: error })
@@ -65,3 +65,5 @@ router.get('/postcards/last',  (req, res, next) => {
   res.json({ lastOrder })
 })
 
+
+export default router
