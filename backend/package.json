@@ -23,7 +23,7 @@
     "requirejs": "^2.3.1"
   },
   "devDependencies": {
-    "babel-eslint": "^4.0.5",
+    "babel-eslint": "^4.1.8",
     "babel-node-debug": "^2.0.0",
     "form-data": "^0.2.0",
     "gulp": "^3.9.0",

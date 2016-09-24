@@ -4,15 +4,15 @@ let fs        = require('fs')
 
 let easyimage = require('easyimage')
 
-const UPLOAD_LOCATION = 'uploads/';
+const UPLOAD_LOCATION = 'uploads/'
 
-var storage  = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, UPLOAD_LOCATION);
+let storage  = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, UPLOAD_LOCATION)
   },
-  filename: function(req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`)
+  }
 })
 
 let upload = multer({ storage })
@@ -23,7 +23,7 @@ export default router
 
 router.post('/images', upload.single('image'), (req, res, next) => {
 
-  var dsPath = req.file.path + '.thumb';
+  let dsPath = `${req.file.path}.thumb`
 
   /*
   easyimage.resize({
@@ -31,31 +31,31 @@ router.post('/images', upload.single('image'), (req, res, next) => {
     dst: dstPath,
     width: 341,
     height: 241
-  });
+  })
   */
 
-  res.json({image: req.file.path})
+  res.json({ image: req.file.path })
 })
 
 router.get('/images', (req, res, next) => {
-  var from = req.query.from;
-  var to   = req.query.to;
+  let from = req.query.from
+  let to   = req.query.to
 
-  var files     = fs.readdirSync(UPLOAD_LOCATION).sort().reverse();
-  var fileCount = files.length;
+  let files     = fs.readdirSync(UPLOAD_LOCATION).sort().reverse()
+  let fileCount = files.length
 
-  files = files.slice(from, to);
+  files = files.slice(from, to)
   files = files.map(function(currentVal) {
-    return UPLOAD_LOCATION + currentVal;
-  });
+    return UPLOAD_LOCATION + currentVal
+  })
 
-  res.json({ files, max: fileCount });
+  res.json({ files, max: fileCount })
 })
 
 router.delete('/images', (req, res, next) => {
-  var image = req.body.image
+  let image = req.body.image
 
-  fs.unlink(image);
+  fs.unlink(image)
 
   res.json({ result: 'success' })
 })

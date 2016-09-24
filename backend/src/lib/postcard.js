@@ -18,14 +18,13 @@ function _formatResponse(resp) {
  * @param {function} callbacks.error - Callback for errors
  * @param {function} callbacks.success - Callback for success
  */
-function _sendPostcard(token, recipient, assetStream, message, callbacks) {
+function _sendPostcard(token, recipient, assetStream, message, callbacks) { // eslint-disable-line max-params
   let client = new Postcardcreator(token)
   let postcard = new Postcardcreator.Postcard(assetStream, message, recipient)
 
   client.sendPostcard(postcard, function(err, result) {
     if (err && 'error' in callbacks) {
-      callbacks.error("Error sending postcard: " +
-          _formatResponse(err))
+      callbacks.error(`Error sending postcard: ${_formatResponse(err)}`)
     }
 
     if ('result' in callbacks) {
@@ -39,15 +38,15 @@ function _sendPostcard(token, recipient, assetStream, message, callbacks) {
  * @param {string} pw - Password
  * @param {function} callback - Call when the auth was successful
  */
-function authorize(user, pw, callback) {
+function authorize(user, pw, success, error) {
   SSOHelper.getPostcardcreatorToken(
     user, pw, (err, token) => {
       if (err) {
-        if ('error' in callbacks) {
-          callbacks.error('Unable to get token: ' + err)
+        if (typeof error !== undefined) {
+          error(`Unable to get token: ${err}`)
         }
       }
-      callback(token)
+      success(token)
     }
   )
 }
@@ -62,7 +61,7 @@ function authorize(user, pw, callback) {
  * @param {function} callbacks.error - Callback for errors
  * @param {function} callbacks.success - Callback for success
  */
-function sendPostcard(user, pw, recipient, assetStream, message, callbacks) {
+function sendPostcard(user, pw, recipient, assetStream, message, callbacks) { // eslint-disable-line max-params
   authorize(user, pw, (token) => {
     _sendPostcard(token, recipient, assetStream, message, callbacks)
   })

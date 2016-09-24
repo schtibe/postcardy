@@ -6,61 +6,62 @@ let fs = require('fs')
 let path = require('path')
 let sendPostcard = require('../../../lib/postcard')
 
-let dataFile = __dirname + '/../../../../config/data.json';
-let configFile = __dirname + '/../../../../config/postconfig.json';
+let dataFile = `${__dirname}/../../../../config/data.json`
+let configFile = `${__dirname}/../../../../config/postconfig.json`
 
 let config = require(configFile)
 
-  let router = express.Router();
-  export default router;
+let router = new express.Router()
+export default router
 
-  router.post('/postcards',  (req, res, next) => {
-    let data = jsonfile.readFileSync(dataFile);
+router.post('/postcards',  (req, res, next) => {
+  let data = jsonfile.readFileSync(dataFile)
 
-    try {
-      if (req.body.imgURL == '') {
-        throw Error("No image given");
-      }
+  try {
+    if (req.body.imgURL === '') {
+      throw Error('No image given')
+    }
 
-      let message = req.body.message;
-      let imgPath = path.join(__dirname, '../../../../', req.body.imgURL);
-      let assetStream = fs.createReadStream(imgPath);
+    let message = req.body.message
+    let imgPath = path.join(__dirname, '../../../../', req.body.imgURL)
+    let assetStream = fs.createReadStream(imgPath)
 
-      let recipient = {
-        salutation : req.body.salutation,
-        givenName  : req.body.givenName,
-        familyName : req.body.familyName,
-        company    : req.body.company,
-        street     : req.body.street,
-        postCode   : req.body.postCode,
-        place      : req.body.place
-      };
+    let recipient = {
+      salutation : req.body.salutation,
+      givenName  : req.body.givenName,
+      familyName : req.body.familyName,
+      company    : req.body.company,
+      street     : req.body.street,
+      postCode   : req.body.postCode,
+      place      : req.body.place
+    }
 
-      sendPostcard(
-        config.username,
-        config.password,
-        recipient,
-        assetStream,
-        message,
-        {
-          success: function(result) {
-            res.json({ type: 'success', message: 'Sent!' })
-          },
-          error: function(error) {
-            res.json({ type: 'error', message: error})
-          }
+    sendPostcard(
+      config.username,
+      config.password,
+      recipient,
+      assetStream,
+      message,
+      {
+        success: (result) => {
+          res.json({ type: 'success', message: 'Sent!' })
+        },
+        error: (error) => {
+          res.json({ type: 'error', message: error })
         }
-      )
-    }
-    catch (ex) {
-      res.json({ type: 'error', message: ex.message });
-    }
-  });
+      }
+    )
+  }
+  catch (ex) {
+    res.json({ type: 'error', message: ex.message })
+  }
+})
 
 
 router.get('/postcards/last',  (req, res, next) => {
-  let data = jsonfile.readFileSync(dataFile);
-  let lastOrder = moment(data.lastOrder);
+  let data = jsonfile.readFileSync(dataFile)
+  let lastOrder = moment(data.lastOrder)
 
-  res.json({ lastOrder });
-});
+  res.json({ lastOrder })
+})
+
