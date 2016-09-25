@@ -1,20 +1,19 @@
 let express = require('express')
+let jsonfile = require('jsonfile')
 let multer = require('multer')
 let moment = require('moment')
-let jsonfile = require('jsonfile')
 let sendPostcard = require('../../../lib/postcard')
 let image = require('../../../lib/image')
+let credentials = require('../../../lib/config')()
 
 let dataFile = `${__dirname}/../../../../../config/data.json`
-let configFile = `${__dirname}/../../../../../config/postconfig.json`
 
-let config = require(configFile)
 
 let router = new express.Router()
 
 router.post('/postcards',  (req, res, next) => {
-  let data = jsonfile.readFileSync(dataFile)
 
+  let data = jsonfile.readFileSync(dataFile)
   try {
     if (req.body.imgURL === '') {
       throw Error('No image given')
@@ -34,8 +33,8 @@ router.post('/postcards',  (req, res, next) => {
     }
 
     sendPostcard(
-      config.username,
-      config.password,
+      credentials.username,
+      credentials.password,
       recipient,
       imageStream,
       message,
