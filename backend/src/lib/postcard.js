@@ -19,7 +19,7 @@ function _formatResponse(resp) {
  * @param {function} callbacks.success - Callback for success
  */
 function _sendPostcard(token, recipient, assetStream, message, callbacks) { // eslint-disable-line max-params
-  let client = new Postcardcreator(token)
+  let client   = new Postcardcreator(token)
   let postcard = new Postcardcreator.Postcard(assetStream, message, recipient)
 
   client.sendPostcard(postcard, function(err, result) {

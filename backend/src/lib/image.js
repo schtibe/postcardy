@@ -1,7 +1,7 @@
 let fs = require('fs')
 let multer = require('multer')
 
-const UPLOAD_LOCATION = 'uploads/'
+const UPLOAD_LOCATION = '../uploads/'
 
 // TODO handle the paths better
 
@@ -24,7 +24,7 @@ function _getStorage() {
 /**
  * Read the images from the directory
  */
-function _readImages() {
+function _listImages() {
   return fs.readdirSync(UPLOAD_LOCATION).sort().reverse()
 }
 
@@ -32,7 +32,7 @@ function _readImages() {
  * Counts the number of images available in the directory
  */
 function countImages() {
-  let files = _readImages()
+  let files = _listImages()
   return files.length
 }
 
@@ -42,7 +42,7 @@ function countImages() {
  * @param {int} range.to - The end point of the range
  */
 function getImages(range) {
-  let images = _readImages()
+  let images = _listImages()
 
   images = images.slice(range.from, range.to)
   images = images.map(function(currentVal) {
@@ -58,8 +58,7 @@ function getImages(range) {
  * @param {string} path - The path of the image
  */
 function readImage(path) {
-  let absPath = path.join(UPLOAD_LOCATION, path)
-  return fs.createReadStream(absPath)
+  return fs.createReadStream(path)
 }
 
 /**
@@ -84,5 +83,6 @@ export default {
   countImages,
   uploadImage,
   getImages,
-  deleteImage
+  deleteImage,
+  readImage
 }

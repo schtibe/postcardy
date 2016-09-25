@@ -5,8 +5,8 @@ let jsonfile = require('jsonfile')
 let sendPostcard = require('../../../lib/postcard')
 let image = require('../../../lib/image')
 
-let dataFile = `${__dirname}/../../../../config/data.json`
-let configFile = `${__dirname}/../../../../config/postconfig.json`
+let dataFile = `${__dirname}/../../../../../config/data.json`
+let configFile = `${__dirname}/../../../../../config/postconfig.json`
 
 let config = require(configFile)
 
