@@ -27,7 +27,7 @@ function _sendPostcard(token, recipient, assetStream, message, callbacks) { // e
       callbacks.error(`Error sending postcard: ${_formatResponse(err)}`)
     }
 
-    if ('result' in callbacks) {
+    if ('success' in callbacks) {
       callbacks.result(_formatResponse(result))
     }
   })

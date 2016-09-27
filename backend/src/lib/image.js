@@ -1,4 +1,5 @@
 let fs = require('fs')
+let path = require('path')
 let multer = require('multer')
 
 const UPLOAD_LOCATION = '../uploads/'
@@ -46,7 +47,7 @@ function getImages(range) {
 
   images = images.slice(range.from, range.to)
   images = images.map(function(currentVal) {
-    return UPLOAD_LOCATION + currentVal
+    return path.join('/images', currentVal)
   })
 
   return images
@@ -56,9 +57,17 @@ function getImages(range) {
  * Read the image to an assetStream
  *
  * @param {string} path - The path of the image
+ * @returns {stream.Readable}
  */
-function readImage(path) {
-  return fs.createReadStream(path)
+function readImage(imgPath) {
+  return fs.createReadStream(
+    path.join(
+      UPLOAD_LOCATION,
+      // TODO this won't be necessary when the
+      // refactoring is complete
+      path.basename(imgPath)
+    )
+  )
 }
 
 /**
