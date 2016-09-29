@@ -24,7 +24,8 @@ function _sendPostcard(token, recipient, assetStream, message, callbacks) { // e
 
   client.sendPostcard(postcard, function(err, result) {
     if (err && 'error' in callbacks) {
-      callbacks.error(`Error sending postcard: ${_formatResponse(err)}`)
+      let formattedResponse = _formatResponse(err)
+      callbacks.error(`Error sending postcard: ${formattedResponse}`)
     }
 
     if ('success' in callbacks) {
