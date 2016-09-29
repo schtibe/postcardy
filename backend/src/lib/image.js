@@ -46,9 +46,6 @@ function getImages(range) {
   let images = _listImages()
 
   images = images.slice(range.from, range.to)
-  images = images.map(function(currentVal) {
-    return path.join('/images', currentVal)
-  })
 
   return images
 }
@@ -65,7 +62,7 @@ function readImage(imgPath) {
       UPLOAD_LOCATION,
       // TODO this won't be necessary when the
       // refactoring is complete
-      path.basename(imgPath)
+      imgPath
     )
   )
 }
@@ -76,7 +73,7 @@ function readImage(imgPath) {
  * @param {string} name - The file name
  */
 function deleteImage(name) {
-  fs.unlinkSync(name)
+  fs.unlinkSync(path.join(UPLOAD_LOCATION, name))
 }
 
 /**

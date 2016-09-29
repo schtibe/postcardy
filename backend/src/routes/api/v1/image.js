@@ -1,6 +1,7 @@
 let express   = require('express')
 let multer    = require('multer')
 let fs        = require('fs')
+let path      = require('path')
 
 let image = require('../../../lib/image')
 
@@ -22,11 +23,15 @@ router.get('/images', (req, res, next) => {
 
   let files = image.getImages({ from, to })
 
+  files = files.map(function(currentVal) {
+    return path.join('/images', currentVal)
+  })
+
   res.json({ files, max: image.countImages() })
 })
 
 router.delete('/images', (req, res, next) => {
-  let img = req.body.image
+  let img = path.basename(req.body.image)
 
   image.deleteImage(img)
 
