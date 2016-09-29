@@ -1,6 +1,6 @@
 let express = require('express')
 let jsonfile = require('jsonfile')
-let multer = require('multer')
+let path   = require('path')
 let moment = require('moment')
 let sendPostcard = require('../../../lib/postcard')
 let image = require('../../../lib/image')
@@ -20,7 +20,8 @@ router.post('/postcards',  (req, res, next) => {
     }
 
     let message = req.body.message
-    let imageStream = image.readImage(req.body.imgURL)
+    let imgName = path.basename(req.body.imgURL)
+    let imageStream = image.readImage(imgName)
 
     let recipient = {
       salutation : req.body.salutation,

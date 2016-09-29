@@ -60,8 +60,6 @@ function readImage(imgPath) {
   return fs.createReadStream(
     path.join(
       UPLOAD_LOCATION,
-      // TODO this won't be necessary when the
-      // refactoring is complete
       imgPath
     )
   )
