@@ -29,7 +29,7 @@ function _sendPostcard(token, recipient, assetStream, message, callbacks) { // e
     }
 
     if ('success' in callbacks) {
-      callbacks.result(_formatResponse(result))
+      callbacks.success(_formatResponse(result))
     }
   })
 }
