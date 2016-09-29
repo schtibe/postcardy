@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --exec babel-node -- bin/srv",
+    "start": "nodemon --exec babel-node -- bin/srv.js",
     "test": "make test"
   },
   "dependencies": {
@@ -18,7 +18,7 @@
     "moment": "^2.10.6",
     "morgan": "^1.6.1",
     "multer": "^1.0.3",
-    "postcardcreator": "git+https://github.com/gido/postcardcreator.git",
+    "postcardcreator": "git+https://github.com/schtibe/postcardcreator.git",
     "request": "^2.60.0",
     "requirejs": "^2.3.1"
   },
