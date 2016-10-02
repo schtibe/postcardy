@@ -14,7 +14,8 @@ router.post('/images', image.uploadImage(), (req, res, next) => {
 
   // TODO get the thumbnail
 
-  res.json({ image: file.path })
+  let imgPath = path.join('/images', path.basename(file.path))
+  res.json({ image: imgPath })
 })
 
 router.get('/images', (req, res, next) => {
