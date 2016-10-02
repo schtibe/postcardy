@@ -41,10 +41,10 @@ router.post('/postcards',  (req, res, next) => {
       message,
       {
         success: (result) => {
-          res.json({ type: 'success', message: 'Sent!' })
-
           data.lastOrder = moment()
           jsonfile.writeFileSync(dataFile, data)
+
+          res.json({ type: 'success', message: 'Sent!' })
         },
         error: (error) => {
           res.json({ type: 'error', message: error })
