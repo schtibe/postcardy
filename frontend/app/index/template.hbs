@@ -1,12 +1,27 @@
-<div class="container full-width">
-  <div class="row">
-      <div class="col-lg-9">
-        <h2 id="title">Send a postcard</h2>
+<div class="root">
+  <div class="postcard">
+    <div class="image_upload" class="item">
+      <form>
 
-        {{post-card imgURL=chosenPic}}
+        <h3>Image</h3>
+        <div>
+          {{file-uploader url="/api/v1/images" setImage=(action "setImage") uploading=(action "uploading") }}
+          <progress style="display: {{uploadProgress}}" />
+        </div>
+
+      </form>
+    </div>
+    <div class="message" class="item">
+      <div>
+        <h3>Message</h3> {{textarea type="text" value=message class="form-control"}}
       </div>
-      <div class="col-lg-3">
-        {{image-lister bubbleImage=(action 'bubbleImage')}}
-      </div>
+    </div>
+
+    <div class="recipient" class="item">
+      <h3>Recipient</h3>
+    </div>
+  </div>
+  <div class="image_list">
+    {{image-lister}}
   </div>
 </div>

@@ -1,11 +1,11 @@
 .imageBig img {
-  width: 1024px;
   height: 726px;
+  width: 1024px;
 }
 
 .imageSmall img {
-  width: 341px;
   height: 242px;
+  width: 341px;
 }
 
 .imageNone {
@@ -13,19 +13,19 @@
 }
 
 .full-width {
-    width: 100%;
-    min-width: 100%;
     max-width: 100%;
+    min-width: 100%;
+    width: 100%;
 }
 .sent_image {
-  width: 400px;
   margin-bottom: 15px;
+  width: 400px;
 }
 
 .slider-button {
-  width: 100%;
+  margin: 5px 0;
   text-align: center;
-  margin: 5px 0px;
+  width: 100%;
 }
 
 img-slider-container {
@@ -33,13 +33,33 @@ img-slider-container {
 }
 
 .buttonbar {
-  position: absolute;
-  left: 25px;
+  background-color: #000;
+  background-color: rgba(0,0,0, 0.5);
   bottom: 25px;
   color: white;
-  background-color: rgba(0,0,0, 0.5);
+  left: 25px;
+  position: absolute;
 }
 
 .buttonbar a {
   color: white;
 }
+
+.root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.postcard {
+  display: flex;
+  flex-basis: 400px;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.postcard .item {
+  margin-top: 50px;
+}
+
