@@ -1,0 +1,37 @@
+.recipient_form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.recipient_form .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.recipient_form .element {
+  display: flex;
+  flex-basis: 30%;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 10px;
+}
+
+.recipient_form .element:first-child {
+  padding-left: 0;
+}
+
+.recipient_form .element:last-child {
+  padding-right: 0;
+}
+
+.recipient_form .post_code {
+  flex-basis: 200px;
+  flex-grow: 0;
+}
+
+.recipient_form .element input, .recipient_form .element label {
+  display: block;
+}

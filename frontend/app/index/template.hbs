@@ -19,6 +19,48 @@
 
     <div class="recipient" class="item">
       <h3>Recipient</h3>
+
+      <div class="recipient_form">
+
+        <div class="row">
+          <div class="element">
+            <label>Company</label>
+            {{input type="text" value=company}}
+          </div>
+          <div class="element">
+            <label>Salutation</label>
+            {{input type="text" value=salutation}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="element">
+            <label>Given Name</label>
+            {{input type="text" value=givenName}}
+          </div>
+          <div class="element">
+            <label>Family Name</label>
+            {{input type="text" value=familyName}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="element">
+            <label>Street</label>
+            {{input type="text" value=street}}
+          </div>
+
+          <div class="element post_code">
+            <label>Post Code</label>
+            {{input type="text" value=postCode}}
+          </div>
+
+          <div class="element">
+            <label>Place</label>
+            {{input type="text" value=place}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="image_list">

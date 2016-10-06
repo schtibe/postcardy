@@ -1,0 +1,23 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.postcard {
+  display: flex;
+  flex-basis: 400px;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.postcard>div {
+  padding: 15px;
+}
+
+.postcard .item {
+  margin-top: 50px;
+}
+
+

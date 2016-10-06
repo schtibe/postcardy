@@ -1,3 +1,6 @@
+@import 'base.css';
+@import 'recipient.css';
+
 .imageBig img {
   height: 726px;
   width: 1024px;
@@ -45,21 +48,4 @@ img-slider-container {
   color: white;
 }
 
-.root {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.postcard {
-  display: flex;
-  flex-basis: 400px;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.postcard .item {
-  margin-top: 50px;
-}
 
