@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/*-
+ * This is the left part of the page
+ */
+.postcard {
+  padding: 15px;
+  flex-grow: 1;
+}

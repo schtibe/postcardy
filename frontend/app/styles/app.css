@@ -1,5 +1,7 @@
 @import 'base.css';
+@import 'layout.css';
 @import 'recipient.css';
+@import 'message.css';
 
 .imageBig img {
   height: 726px;
@@ -47,5 +49,3 @@ img-slider-container {
 .buttonbar a {
   color: white;
 }
-
-

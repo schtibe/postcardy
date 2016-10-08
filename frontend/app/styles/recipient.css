@@ -1,37 +1,25 @@
-.recipient_form {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+/*-
+ * The height of the elements in the recipient
+ * part
+ */
+.recipient .element {
+  height: 4em;
 }
 
-.recipient_form .row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.recipient_form .element {
-  display: flex;
-  flex-basis: 30%;
-  flex-direction: column;
-  flex-grow: 1;
-  flex-shrink: 1;
-  padding: 10px;
-}
-
-.recipient_form .element:first-child {
-  padding-left: 0;
-}
-
-.recipient_form .element:last-child {
-  padding-right: 0;
-}
-
-.recipient_form .post_code {
-  flex-basis: 200px;
+/*-
+ * Post code doesn't need to be that wide
+ */
+.recipient .post_code {
   flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 80px;
 }
 
-.recipient_form .element input, .recipient_form .element label {
+.recipient_form input, .recipient_form label {
   display: block;
+}
+
+.recipient_form label {
+  font-size: 14px;
+  margin-bottom: 5px;
 }

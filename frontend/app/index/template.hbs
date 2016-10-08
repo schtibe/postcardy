@@ -1,27 +1,38 @@
 <div class="root">
   <div class="postcard">
-    <div class="image_upload" class="item">
-      <form>
-
-        <h3>Image</h3>
-        <div>
-          {{file-uploader url="/api/v1/images" setImage=(action "setImage") uploading=(action "uploading") }}
-          <progress style="display: {{uploadProgress}}" />
-        </div>
-
-      </form>
-    </div>
-    <div class="message" class="item">
-      <div>
-        <h3>Message</h3> {{textarea type="text" value=message class="form-control"}}
+    <form>
+      <h2>Image</h2>
+      <div class="uploader">
+        {{file-uploader url="/api/v1/images" setImage=(action "setImage") uploading=(action "uploading") }}
+        <progress style="display: {{uploadProgress}}" />
       </div>
-    </div>
 
-    <div class="recipient" class="item">
-      <h3>Recipient</h3>
 
-      <div class="recipient_form">
+      <h2>Message</h2>
 
+      <div class="message">
+        <div class="row">
+          <div class="element">
+            {{textarea type="text" value=message class="form-control"}}
+          </div>
+          <div class="element">
+            <div>
+              Your last order was on
+              {{moment-format lastOrder 'DD.MM.YYYY HH:mm'}}<br />
+              This was {{moment-from-now lastOrder}}
+            </div>
+            <div>
+              <div class="alert alert-{{resultClass}}">
+                {{result}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Recipient</h2>
+
+      <div class="recipient">
         <div class="row">
           <div class="element">
             <label>Company</label>
@@ -52,7 +63,7 @@
 
           <div class="element post_code">
             <label>Post Code</label>
-            {{input type="text" value=postCode}}
+            {{input type="number" min="1000" max="9999" value=postCode}}
           </div>
 
           <div class="element">
@@ -61,8 +72,15 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
+      <h2>Action!</h2>
+      <div>
+        <button {{action 'send'}} class="btn">Send Postcard</button>
+      </div>
+    </form>
+
+  </div> {{!-- postcard end --}}
+
   <div class="image_list">
     {{image-lister}}
   </div>

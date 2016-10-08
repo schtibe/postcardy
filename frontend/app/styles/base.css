@@ -1,23 +1,48 @@
-.root {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+body {
+  color: rgb(51, 51, 51);
+  font-family: 'Open Sans', sans-serif;
 }
 
-.postcard {
-  display: flex;
-  flex-basis: 400px;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.postcard>div {
+h1 {
   padding: 15px;
 }
 
-.postcard .item {
-  margin-top: 50px;
+/*-
+ * This is a row inside the items
+ */
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  justify-content: center;
 }
 
+/*-
+ * Columns
+ *
+ * Not quite sure yet why this works, but it
+ * does the job for know
+ */
+.element {
+  display: flex;
+  /*flex-basis: calc(50% - 10px);*/
+  flex-direction: column;
+  flex-grow: 1;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
+/*-
+ * Padding shall only be between the elements
+ */
+.element:first-child {
+  padding-left: 0;
+}
+
+/*-
+ * Padding shall only be between the elements
+ */
+.element:last-child {
+  padding-right: 0;
+}
