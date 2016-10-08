@@ -12,3 +12,9 @@
   padding: 15px;
   flex-grow: 1;
 }
+
+.image_list {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 200px;
+}

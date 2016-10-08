@@ -27,7 +27,7 @@ export default Ember.Component.extend({
   },
   actions: {
     choosePic(image) {
-      this.sendAction('bubbleImage', image)
+      this.sendAction('choose', image)
     },
     up() {
       this.set('from' , this.get('from') - 1)

@@ -1,0 +1,31 @@
+.img-slider-container {
+  position: relative;
+}
+
+.buttonbar {
+  background-color: #000;
+  background-color: rgba(0,0,0, 0.5);
+  bottom: 25px;
+  color: white;
+  left: 25px;
+  position: absolute;
+}
+
+.buttonbar a {
+  color: white;
+}
+
+.img-lister {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-lister>div {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-base: 200px;
+}
+
+.image img {
+  height: 100%;
+}

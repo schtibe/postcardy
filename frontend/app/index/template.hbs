@@ -1,10 +1,19 @@
 <div class="root">
   <div class="postcard">
+    <h1>Postcardy</h1>
     <form>
       <h2>Image</h2>
       <div class="uploader">
-        {{file-uploader url="/api/v1/images" setImage=(action "setImage") uploading=(action "uploading") }}
-        <progress style="display: {{uploadProgress}}" />
+        {{file-uploader url="/api/v1/images" setImage=(action "setImage")}}
+      </div>
+
+      <div class="{{imgClass}}">
+        <div>
+          <img id="chosenImage" src={{imgURL}} {{action 'zoomImage'}} >
+        </div>
+        <div>
+          <button class="btn" {{action "deleteImage"}}>Delete image</button>
+        </div>
       </div>
 
 
@@ -36,39 +45,39 @@
         <div class="row">
           <div class="element">
             <label>Company</label>
-            {{input type="text" value=company}}
+            {{input type="text" value=recipient.company}}
           </div>
           <div class="element">
             <label>Salutation</label>
-            {{input type="text" value=salutation}}
+            {{input type="text" value=recipient.salutation}}
           </div>
         </div>
 
         <div class="row">
           <div class="element">
             <label>Given Name</label>
-            {{input type="text" value=givenName}}
+            {{input type="text" value=recipient.givenName}}
           </div>
           <div class="element">
             <label>Family Name</label>
-            {{input type="text" value=familyName}}
+            {{input type="text" value=recipient.familyName}}
           </div>
         </div>
 
         <div class="row">
           <div class="element">
             <label>Street</label>
-            {{input type="text" value=street}}
+            {{input type="text" value=recipient.street}}
           </div>
 
           <div class="element post_code">
             <label>Post Code</label>
-            {{input type="number" min="1000" max="9999" value=postCode}}
+            {{input type="number" min="1000" max="9999" value=recipient.postCode}}
           </div>
 
           <div class="element">
             <label>Place</label>
-            {{input type="text" value=place}}
+            {{input type="text" value=recipient.place}}
           </div>
         </div>
       </div>
@@ -82,6 +91,6 @@
   </div> {{!-- postcard end --}}
 
   <div class="image_list">
-    {{image-lister}}
+    {{image-lister choose=(action "setImage")}}
   </div>
 </div>
