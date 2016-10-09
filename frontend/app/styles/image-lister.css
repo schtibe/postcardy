@@ -1,9 +1,9 @@
 .buttonbar {
   background-color: #000;
   background-color: rgba(0,0,0, 0.5);
-  bottom: 25px;
+  bottom: 10px;
   color: white;
-  left: 25px;
+  left: 10px;
   position: absolute;
 }
 
@@ -20,6 +20,10 @@
 .img-lister .image {
   flex-grow: 1;
   flex-shrink: 1;
+}
+
+.image {
+  position: relative;
 }
 
 .image img {

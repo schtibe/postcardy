@@ -9,12 +9,10 @@
 
   {{#each images as |image|}}
   <div class="image">
-    <div class="col-lg-12 img-slider-container">
-     <img src="{{image}}" class="sent_image" {{action "choosePic" image }} />
-      <div class="buttonbar"><a href="#" {{action 'choosePic' image }}>Use</a> |
-        <a href="#" {{action "deleteImage" image}}>Delete</a>
-      </div>
-    </div>
+   <img src="{{image}}" {{action "choosePic" image }} />
+   <div class="buttonbar"><a href="#" {{action 'choosePic' image }}>Use</a> |
+     <a href="#" {{action "deleteImage" image}}>Delete</a>
+   </div>
   </div>
   {{/each}}
 
