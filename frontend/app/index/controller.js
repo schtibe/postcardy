@@ -1,4 +1,5 @@
 import Ember from 'ember'
+import Moment from 'moment'
 
 export default Ember.Controller.extend({
 
@@ -46,6 +47,11 @@ export default Ember.Controller.extend({
     postCode  : '3284',
     place     : 'Fräschels'
   },
+
+  /**
+   * The message
+   */
+  message: moment().format('DD.MM.YYYY'),
 
   /**
    * Get the last order date
@@ -96,6 +102,7 @@ export default Ember.Controller.extend({
 
       let data = this.get('recipient')
       data.imgURL = this.get('imgURL')
+      data.message = this.get('message')
 
       Ember.$.ajax({
         url: '/api/v1/postcards',
