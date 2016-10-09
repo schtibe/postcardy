@@ -1,8 +1,3 @@
-body {
-  color: rgb(51, 51, 51);
-  font-family: 'Open Sans', sans-serif;
-}
-
 /*-
  * This is a row inside the items
  */
@@ -41,4 +36,18 @@ body {
  */
 .element:last-child {
   padding-right: 0;
+}
+
+.imageBig img {
+  height: 726px;
+  width: 1024px;
+}
+
+.imageSmall img {
+  height: 242px;
+  width: 341px;
+}
+
+.imageNone {
+  display: none;
 }

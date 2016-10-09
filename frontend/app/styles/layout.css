@@ -3,6 +3,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  height: 100%;
 }
 
 /*-
@@ -11,10 +12,18 @@
 .postcard {
   padding: 15px;
   flex-grow: 1;
+  height: 100%;
 }
 
 .image_list {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 200px;
+  /*height: 100%;*/
+  flex-basis: 400px;
+  flex-grow: 0;
+}
+
+/*-
+ * Ember makes a div around the component
+ */
+.image_list>div {
+  height: 100%;
 }

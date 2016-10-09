@@ -1,31 +1,16 @@
-@import 'base.css';
 @import 'layout.css';
 @import 'recipient.css';
 @import 'message.css';
 @import 'image-lister.css';
+@import 'postcard.css';
 
-.imageBig img {
-  height: 726px;
-  width: 1024px;
+body {
+  color: rgb(51, 51, 51);
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
 }
 
-.imageSmall img {
-  height: 242px;
-  width: 341px;
+body>div {
+  height: 100%;
 }
 
-.imageNone {
-  display: none;
-}
-
-.full-width {
-  max-width: 100%;
-  min-width: 100%;
-  width: 100%;
-}
-
-.slider-button {
-  margin: 5px 0;
-  text-align: center;
-  width: 100%;
-}
