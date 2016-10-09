@@ -1,15 +1,38 @@
 import Ember from 'ember'
 
 export default Ember.Controller.extend({
+
+  /**
+   * The URL of the currently chosen or uploaded image
+   */
+  imgURL: null,
+
+  /**
+   * TODO the upload progress
+   */
   uploadProgress: 'none',
 
   /**
-   * The css class of the image
+   * Whether the app is sending a postcard
    *
-   * Is hidden at first
-   * Possible values: imageNone, imageSmall, imageBig
+   * used to show the progress bar
    */
-  imgClass: 'imageNone',
+  isSending: false,
+
+  /**
+   * Whether an image is set
+   */
+  isImageSet: false,
+
+  /**
+   * The class of the result box
+   */
+  resultClass: '',
+
+  /**
+   * Variable holding when the last order was
+   */
+  lastOrder: null,
 
   /**
    * The postcard recipient
@@ -24,6 +47,23 @@ export default Ember.Controller.extend({
     place     : 'Fräschels'
   },
 
+  /**
+   * Get the last order date
+   */
+  getLastOrder() {
+    Ember.$.ajax({
+      url: '/api/v1/postcards/last',
+      type: 'GET',
+      success: (res) => {
+        this.set('lastOrder', res.lastOrder)
+      }
+    })
+  },
+
+  init() {
+    this.getLastOrder()
+  },
+
   actions: {
     /**
      * Set an image
@@ -32,20 +72,46 @@ export default Ember.Controller.extend({
      */
     setImage(image) {
       this.set('imgURL', image)
-      this.set('imgClass', 'imageSmall')
+      this.set('isImageSet', true)
     },
     /**
-     * Zoom the image
-     *
-     * i.e. change the css class
+     * Unset an image
      */
-    zoomImage(image) {
-      if (this.get('imgClass') === 'imageSmall') {
-        this.set('imgClass', 'imageBig')
-      }
-      else {
-        this.set('imgClass', 'imageSmall')
-      }
+    unsetImage() {
+      this.set('imgURL', '')
+      this.set('isImageSet', false)
+    },
+    /**
+     * Reset the route - TODO doesn't work yet
+     */
+    reset() {
+      this.transitionToRoute('index')
+    },
+    /**
+     * Send the postcard
+     */
+    send() {
+      this.set('isSending', true)
+      this.set('resultClass', '')
+
+      let data = this.get('recipient')
+      data.imgURL = this.get('imgURL')
+
+      Ember.$.ajax({
+        url: '/api/v1/postcards',
+        data,
+        type: 'POST'
+      }).done(res => {
+        this.set('result',      res.message)
+        this.set('resultClass', res.type)
+
+        this.getLastOrder()
+      }).error(err => {
+        this.set('result', 'Error requesting the order: ' + err)
+        this.set('resultClass', 'error')
+      }).always(() => {
+        this.set('isSending', false)
+      })
     }
   }
 })

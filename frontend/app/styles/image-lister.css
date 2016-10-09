@@ -22,12 +22,15 @@
   flex-shrink: 1;
 }
 
-.image {
+.img-lister .image {
   position: relative;
 }
 
-.image img {
+.img-lister img {
   width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .button {

@@ -2,90 +2,103 @@
   <div class="postcard">
     <h1>Postcardy</h1>
     <form>
-      <h2>Image</h2>
-      <div class="uploader">
-        {{file-uploader url="/api/v1/images" setImage=(action "setImage")}}
-      </div>
-
-      <div class="{{imgClass}}">
-        <div>
-          <img id="chosenImage" src={{imgURL}} {{action 'zoomImage'}} >
-        </div>
-        <div>
-          <button class="btn" {{action "deleteImage"}}>Delete image</button>
-        </div>
-      </div>
-
-
-      <h2>Message</h2>
-
-      <div class="message">
-        <div class="row">
-          <div class="element">
-            {{textarea type="text" value=message class="form-control"}}
+      <div class="row top_row">
+        <div class="column">
+          <h2>Image</h2>
+          <div class="uploader" style="display: {{if isImageSet "none" "block"}}">
+            {{file-uploader url="/api/v1/images" setImage=(action "setImage")}}
           </div>
-          <div class="element">
-            <div>
-              Your last order was on
-              {{moment-format lastOrder 'DD.MM.YYYY HH:mm'}}<br />
-              This was {{moment-from-now lastOrder}}
+
+          <div class="image" style="display: {{if isImageSet "block" "none"}}">
+            <div class="image_container">
+              <img id="chosenImage" src={{imgURL}}>
+              <div class="image_dimensions" />
             </div>
             <div>
-              <div class="alert alert-{{resultClass}}">
-                {{result}}
-              </div>
+              <button class="btn" {{action "deleteImage"}}>Delete image</button>
+              <button class="btn" {{action "unsetImage"}}>Unset</button>
             </div>
           </div>
         </div>
-      </div>
 
-      <h2>Recipient</h2>
-
-      <div class="recipient">
-        <div class="row">
-          <div class="element">
-            <label>Company</label>
-            {{input type="text" value=recipient.company}}
-          </div>
-          <div class="element">
-            <label>Salutation</label>
-            {{input type="text" value=recipient.salutation}}
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="element">
-            <label>Given Name</label>
-            {{input type="text" value=recipient.givenName}}
-          </div>
-          <div class="element">
-            <label>Family Name</label>
-            {{input type="text" value=recipient.familyName}}
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="element">
-            <label>Street</label>
-            {{input type="text" value=recipient.street}}
-          </div>
-
-          <div class="element post_code">
-            <label>Post Code</label>
-            {{input type="number" min="1000" max="9999" value=recipient.postCode}}
-          </div>
-
-          <div class="element">
-            <label>Place</label>
-            {{input type="text" value=recipient.place}}
+        <div class="column">
+          <h2>Info</h2>
+          <div>
+            Your last order was on
+            {{moment-format lastOrder 'DD.MM.YYYY HH:mm'}}<br />
+            This was {{moment-from-now lastOrder}}
           </div>
         </div>
       </div>
 
-      <h2>Action!</h2>
-      <div>
-        <button {{action 'send'}} class="btn">Send Postcard</button>
+
+      <div class="row">
+        <div class="column recipient">
+          <h2>Recipient</h2>
+          <div class="row">
+            <div class="column">
+              <label>Company</label>
+              {{input type="text" value=recipient.company}}
+            </div>
+            <div class="column">
+              <label>Salutation</label>
+              {{input type="text" value=recipient.salutation}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column">
+              <label>Given Name</label>
+              {{input type="text" value=recipient.givenName}}
+            </div>
+            <div class="column">
+              <label>Family Name</label>
+              {{input type="text" value=recipient.familyName}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="column">
+              <label>Street</label>
+              {{input type="text" value=recipient.street}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="column post_code">
+              <label>Post Code</label>
+              {{input type="number" min="1000" max="9999" value=recipient.postCode}}
+            </div>
+
+            <div class="column">
+              <label>Place</label>
+              {{input type="text" value=recipient.place}}
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <h2>Message</h2>
+          {{textarea type="text" value=message class="form-control"}}
+        </div>
       </div>
+
+      <div class="row">
+        <div class="column">
+          <h2>Action!</h2>
+          <div>
+            <button {{action 'send'}} class="action">Send Postcard</button>
+            <button {{action 'reset'}} class="action">Reset</button>
+          </div>
+          <div>
+            {{#if isSending}}<progress />{{/if}}
+          </div>
+        </div>
+
+      </div>
+     <div class="alert alert_{{resultClass}}">
+      {{result}}
+     </div>
+
     </form>
 
   </div> {{!-- postcard end --}}
