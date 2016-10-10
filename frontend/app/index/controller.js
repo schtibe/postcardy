@@ -61,7 +61,7 @@ export default Ember.Controller.extend({
       url: '/api/v1/postcards/last',
       type: 'GET',
       success: (res) => {
-        this.set('lastOrder', res.lastOrder)
+        this.set('lastOrder', res.data)
       }
     })
   },

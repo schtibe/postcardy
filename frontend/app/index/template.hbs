@@ -24,9 +24,14 @@
         <div class="column">
           <h2>Info</h2>
           <div>
-            Your last order was on
-            {{moment-format lastOrder 'DD.MM.YYYY HH:mm'}}<br />
-            This was {{moment-from-now lastOrder}}
+            {{# if lastOrder.date}}
+              Your last order was on
+              {{moment-format lastOrder.date 'DD.MM.YYYY HH:mm'}}<br />
+              This was {{moment-from-now lastOrder.date}}<br />
+              The image was <br /><img src="images/{{lastOrder.image}}" class="last_order">
+            {{else}}
+              It looks like you have never made an order before
+            {{/if}}
           </div>
         </div>
       </div>

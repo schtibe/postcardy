@@ -1,19 +1,14 @@
 let express = require('express')
-let jsonfile = require('jsonfile')
 let path   = require('path')
 let moment = require('moment')
 let sendPostcard = require('../../../lib/postcard')
 let image = require('../../../lib/image')
 let credentials = require('../../../lib/config')()
-
-let dataFile = `${__dirname}/../../../../../config/data.json`
-
+let order = require('../../../lib/order')
 
 let router = new express.Router()
 
 router.post('/postcards',  (req, res, next) => {
-
-  let data = jsonfile.readFileSync(dataFile)
   try {
     if (req.body.imgURL === '') {
       throw Error('No image given')
@@ -41,9 +36,7 @@ router.post('/postcards',  (req, res, next) => {
       message,
       {
         success: (result) => {
-          data.lastOrder = moment()
-          jsonfile.writeFileSync(dataFile, data)
-
+          order.saveOrder(moment(), imgName)
           res.json({ type: 'success', message: 'Sent!' })
         },
         error: (error) => {
@@ -59,10 +52,8 @@ router.post('/postcards',  (req, res, next) => {
 
 
 router.get('/postcards/last',  (req, res, next) => {
-  let data = jsonfile.readFileSync(dataFile)
-  let lastOrder = moment(data.lastOrder)
-
-  res.json({ lastOrder })
+  let data = order.getLastOrder()
+  res.json({ data })
 })
 
 
