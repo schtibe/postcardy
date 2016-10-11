@@ -38,15 +38,7 @@ export default Ember.Controller.extend({
   /**
    * The postcard recipient
    */
-  recipient: {
-    salutation: 'Herr',
-    givenName : 'Stefan',
-    familyName: 'Heinemann',
-    company   : '',
-    street    : 'hintere Strasse 24',
-    postCode  : '3284',
-    place     : 'Fräschels'
-  },
+  recipient: {},
 
   /**
    * The message
@@ -66,8 +58,22 @@ export default Ember.Controller.extend({
     })
   },
 
+  /**
+   * Get the default address
+   */
+  getDefaultAddress() {
+    Ember.$.ajax({
+      url: '/api/v1/addresses',
+      type: 'GET',
+      success: (res) => {
+        this.set('recipient', res.data)
+      }
+    })
+  },
+
   init() {
     this.getLastOrder()
+    this.getDefaultAddress()
   },
 
   actions: {
@@ -100,9 +106,11 @@ export default Ember.Controller.extend({
       this.set('isSending', true)
       this.set('resultClass', '')
 
-      let data = this.get('recipient')
-      data.imgURL = this.get('imgURL')
-      data.message = this.get('message')
+      let data = {
+        recipient: this.get('recipient'),
+        imgUrl   : this.get('imgURL'),
+        message  : this.get('message')
+      }
 
       Ember.$.ajax({
         url: '/api/v1/postcards',
