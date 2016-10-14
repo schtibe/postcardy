@@ -1,8 +1,6 @@
-import Ember from 'ember'
-import Moment from 'moment'
+import Ember from 'ember';
 
-export default Ember.Controller.extend({
-
+export default Ember.Route.extend({
   /**
    * The URL of the currently chosen or uploaded image
    */
@@ -53,7 +51,7 @@ export default Ember.Controller.extend({
       url: '/api/v1/postcards/last',
       type: 'GET',
       success: (res) => {
-        this.set('lastOrder', res.data)
+        this.controller.set('lastOrder', res.data)
       }
     })
   },
@@ -66,16 +64,15 @@ export default Ember.Controller.extend({
       url: '/api/v1/addresses',
       type: 'GET',
       success: (res) => {
-        this.set('recipient', res.data)
+        this.controller.set('recipient', res.data)
       }
     })
   },
 
-  init() {
+  setupController: function(controller, model) {
     this.getLastOrder()
     this.getDefaultAddress()
   },
-
   actions: {
     /**
      * Set an image
@@ -97,7 +94,7 @@ export default Ember.Controller.extend({
      * Reset the route - TODO doesn't work yet
      */
     reset() {
-      this.transitionToRoute('index')
+      this.refresh()
     },
     /**
      * Send the postcard
@@ -129,4 +126,4 @@ export default Ember.Controller.extend({
       })
     }
   }
-})
+});
