@@ -1,6 +1,6 @@
 {
-	"username"  : "dude.duderino@example.com",
-	"password"  : "rug"
+  "username"  : "dude.duderino@example.com",
+  "password"  : "rug",
   "salutation": "Herr",
   "givenName" : "Jeff",
   "familyName": "Lebowski",
