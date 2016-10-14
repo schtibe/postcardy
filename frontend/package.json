@@ -22,6 +22,7 @@
     "babel-eslint": "^6.0.2",
     "broccoli-asset-rev": "^2.1.2",
     "copy-dereference": "^1.0.0",
+    "ember-ajax": "2.5.2",
     "ember-cli": "2.7.0",
     "ember-cli-app-version": "^2.0.0",
     "ember-cli-babel": "^5.1.10",
@@ -42,6 +43,7 @@
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
     "ember-moment": "7.0.0-beta.3",
+    "ember-route-action-helper": "2.0.0",
     "eslint": "^3.5.0",
     "postcss-responsive-type": "^0.4.0"
   },

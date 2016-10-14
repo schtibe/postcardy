@@ -6,12 +6,12 @@
         <div class="column">
           <h2>Image</h2>
           <div class="uploader" style="display: {{if isImageSet "none" "block"}}">
-            {{file-uploader url="/api/v1/images" setImage=(action 'setImage')}}
+            {{file-uploader url="/api/v1/images" setImage=(route-action 'setImage')}}
           </div>
 
           <div class="image" style="display: {{if isImageSet "block" "none"}}">
             <div class="image_container">
-              <img id="chosenImage" src={{imgURL}}>
+              <img id="chosenImage" src={{model.imgURL}}>
               <div class="image_dimensions" />
             </div>
             <div>
@@ -42,47 +42,47 @@
           <div class="row">
             <div class="column">
               <label>Company</label>
-              {{input type="text" value=recipient.company}}
+              {{input type="text" value=model.recipient.company}}
             </div>
             <div class="column">
               <label>Salutation</label>
-              {{input type="text" value=recipient.salutation}}
+              {{input type="text" value=model.recipient.salutation}}
             </div>
           </div>
 
           <div class="row">
             <div class="column">
               <label>Given Name</label>
-              {{input type="text" value=recipient.givenName}}
+              {{input type="text" value=model.recipient.givenName}}
             </div>
             <div class="column">
               <label>Family Name</label>
-              {{input type="text" value=recipient.familyName}}
+              {{input type="text" value=model.recipient.familyName}}
             </div>
           </div>
 
           <div class="row">
             <div class="column">
               <label>Street</label>
-              {{input type="text" value=recipient.street}}
+              {{input type="text" value=model.recipient.street}}
             </div>
           </div>
           <div class="row">
             <div class="column post_code">
               <label>Post Code</label>
-              {{input type="number" min="1000" max="9999" value=recipient.postCode}}
+              {{input type="number" min="1000" max="9999" value=model.recipient.postCode}}
             </div>
 
             <div class="column">
               <label>Place</label>
-              {{input type="text" value=recipient.place}}
+              {{input type="text" value=model.recipient.place}}
             </div>
           </div>
         </div>
 
         <div class="column">
           <h2>Message</h2>
-          {{textarea type="text" value=message class="form-control"}}
+          {{textarea type="text" value=model.message class="form-control"}}
         </div>
       </div>
 
@@ -108,6 +108,6 @@
   </div> {{!-- postcard end --}}
 
   <div class="image_list">
-    {{image-lister choose=(action 'setImage')}}
+    {{image-lister choose=(route-action 'setImage')}}
   </div>
 </div>

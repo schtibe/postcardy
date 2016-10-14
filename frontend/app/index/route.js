@@ -1,47 +1,12 @@
 import Ember from 'ember';
 
+/**
+ * TODO use
+ * https://github.com/ember-cli/ember-ajax
+ */
+
 export default Ember.Route.extend({
-  /**
-   * The URL of the currently chosen or uploaded image
-   */
-  imgURL: null,
-
-  /**
-   * TODO the upload progress
-   */
-  uploadProgress: 'none',
-
-  /**
-   * Whether the app is sending a postcard
-   *
-   * used to show the progress bar
-   */
-  isSending: false,
-
-  /**
-   * Whether an image is set
-   */
-  isImageSet: false,
-
-  /**
-   * The class of the result box
-   */
-  resultClass: '',
-
-  /**
-   * Variable holding when the last order was
-   */
-  lastOrder: null,
-
-  /**
-   * The postcard recipient
-   */
-  recipient: {},
-
-  /**
-   * The message
-   */
-  message: moment().format('DD.MM.YYYY'),
+  ajax: Ember.inject.service(),
 
   /**
    * Get the last order date
@@ -60,19 +25,28 @@ export default Ember.Route.extend({
    * Get the default address
    */
   getDefaultAddress() {
-    Ember.$.ajax({
-      url: '/api/v1/addresses',
-      type: 'GET',
-      success: (res) => {
-        this.controller.set('recipient', res.data)
-      }
+    return this.get('ajax').request(
+      '/api/v1/addresses'
+    )
+  },
+
+  setupController(controller, model) {
+    this._super(controller, model);
+    this.getLastOrder()
+  },
+
+  model() {
+    return new Ember.RSVP.Promise((resolve) => {
+      this.getDefaultAddress().then(res => {
+        resolve({
+          recipient: res.data,
+          imgURL: '',
+          message: moment().format('DD.MM.YYYY')
+        })
+      })
     })
   },
 
-  setupController: function(controller, model) {
-    this.getLastOrder()
-    this.getDefaultAddress()
-  },
   actions: {
     /**
      * Set an image
@@ -81,17 +55,17 @@ export default Ember.Route.extend({
      */
     setImage(image) {
       this.set('imgURL', image)
-      this.set('isImageSet', true)
+      this.controller.set('isImageSet', true)
     },
     /**
      * Unset an image
      */
     unsetImage() {
       this.set('imgURL', '')
-      this.set('isImageSet', false)
+      this.controller.set('isImageSet', false)
     },
     /**
-     * Reset the route - TODO doesn't work yet
+     * Reset the route
      */
     reset() {
       this.refresh()
@@ -100,8 +74,8 @@ export default Ember.Route.extend({
      * Send the postcard
      */
     send() {
-      this.set('isSending', true)
-      this.set('resultClass', '')
+      this.controller.set('isSending', true)
+      this.controller.set('resultClass', '')
 
       let data = {
         recipient: this.get('recipient'),
@@ -114,15 +88,15 @@ export default Ember.Route.extend({
         data,
         type: 'POST'
       }).done(res => {
-        this.set('result',      res.message)
-        this.set('resultClass', res.type)
+        this.controller.set('result',      res.message)
+        this.controller.set('resultClass', res.type)
 
         this.getLastOrder()
       }).error(err => {
-        this.set('result', 'Error requesting the order: ' + err)
-        this.set('resultClass', 'error')
+        this.controller.set('result', 'Error requesting the order: ' + err)
+        this.controller.set('resultClass', 'error')
       }).always(() => {
-        this.set('isSending', false)
+        this.controller.set('isSending', false)
       })
     }
   }

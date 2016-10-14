@@ -2,6 +2,13 @@ import Ember from 'ember'
 
 import { on, observes } from 'ember-computed-decorators'
 
+/**
+ * TODO use
+ * https://github.com/ember-cli/ember-ajax
+ *
+ * oh, and refactor
+ */
+
 export default Ember.Component.extend({
   images: [],
   from:    0,
