@@ -1,10 +1,7 @@
-
-
 <div class="img-lister">
-
   <div class="button">
     <button class="btn slider-button" {{action 'up'}}
-      disabled="{{unless from "disabled" ""}}">Up</button>
+      disabled="{{unless isUpEnabled "disabled"}}">Up</button>
   </div>
 
   {{#each images as |image|}}
@@ -16,9 +13,8 @@
   </div>
   {{/each}}
 
-
   <div class="button">
-    <button class="btn slider-button" {{action 'down'}} id="downBtn">Down</button>
+    <button class="btn slider-button" {{action 'down'}}
+      disabled="{{unless isDownEnabled "disabled"}}">Down</button>
   </div>
-
 </div>
