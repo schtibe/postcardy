@@ -26,7 +26,12 @@ function _getStorage() {
  * Read the images from the directory
  */
 function _listImages() {
-  return fs.readdirSync(UPLOAD_LOCATION).sort().reverse()
+  let files = fs.readdirSync(UPLOAD_LOCATION).sort().reverse()
+
+  return files.filter((element) => {
+    let ext = path.extname(element).toLowerCase()
+    return [ '.png', '.jpg' ].indexOf(ext) >= 0
+  })
 }
 
 /**
