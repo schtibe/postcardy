@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from 'ember'
 
 export default Ember.Controller.extend({
   /**
@@ -26,5 +26,10 @@ export default Ember.Controller.extend({
   /**
    * Variable holding when the last order was
    */
-  lastOrder: null
+  lastOrder: null,
+
+  /**
+   * The result string of sending a postcard
+   */
+  result: ''
 })
