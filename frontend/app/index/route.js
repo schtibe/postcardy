@@ -27,16 +27,27 @@ export default Ember.Route.extend({
     )
   },
 
+  /**
+   * We need to provide a way to reset the controller's
+   * properties
+   * Can't do it in setupController since it ain't fired with
+   * refresh (or at least not when the model isn't changed, which
+   * seems to be the case here)
+   * @returns{void}
+   */
+  initController() {
+    this.controller.set('isSending', false)
+    this.controller.set('isImageSet', false)
+    this.controller.set('resultClass', '')
+    this.controller.set('result', '')
+
+    this.getLastOrder()
+  },
+
   setupController(controller, model) {
     this._super(controller, model)
 
-    // TODO is this really necessary?
-    controller.set('isSending', false)
-    controller.set('isImageSet', false)
-    controller.set('resultClass', '')
-    controller.set('result', '')
-
-    this.getLastOrder()
+    this.initController()
   },
 
   model() {
@@ -76,7 +87,7 @@ export default Ember.Route.extend({
      */
     reset() {
       this.refresh()
-      this.setupController()
+      this.initController()
     },
     /**
      * Send the postcard
