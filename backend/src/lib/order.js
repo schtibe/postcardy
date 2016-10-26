@@ -38,7 +38,7 @@ function getLastOrder() {
 function saveOrder(date, image) {
   let data = { date, image }
 
-  jsonfile.writeFile(dataFilePath, data)
+  return jsonfile.writeFileSync(dataFilePath, data)
 }
 
 export default {
