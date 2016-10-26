@@ -1,10 +1,9 @@
 let fs = require('fs')
 let path = require('path')
 let multer = require('multer')
+let thumb = require('node-thumbnail').thumb
 
 const UPLOAD_LOCATION = '../uploads/'
-
-// TODO handle the paths better
 
 /**
  * Return the storage for multer
@@ -85,7 +84,19 @@ function deleteImage(name) {
 function uploadImage() {
   let storage = _getStorage()
   let upload = multer({ storage })
+
   return upload.single('image')
+}
+
+/**
+ * Create thumbnail from path
+ */
+function createThumb(image) {
+  thumb({
+    source: path.join(UPLOAD_LOCATION, image),
+    destination: UPLOAD_LOCATION,
+    width: 800
+  })
 }
 
 export default {
@@ -93,5 +104,6 @@ export default {
   uploadImage,
   getImages,
   deleteImage,
-  readImage
+  readImage,
+  createThumb
 }

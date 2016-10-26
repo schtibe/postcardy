@@ -12,7 +12,7 @@ let router = new express.Router
 router.post('/images', image.uploadImage(), (req, res, next) => {
   let file = req.file
 
-  // TODO get the thumbnail
+  image.createThumb(path.basename(file.path))
 
   let imgPath = path.join('/images', path.basename(file.path))
   res.json({ image: imgPath })
