@@ -11,7 +11,7 @@
 
           <div class="image" style="display: {{if isImageSet "block" "none"}}">
             <div class="image_container">
-              <img id="chosenImage" src={{model.imgURL}}>
+              <img id="chosenImage" src={{thumbnail model.imgURL}}>
               <div class="image_dimensions" />
             </div>
             <div>
@@ -28,7 +28,7 @@
               Your last order was on
               {{moment-format lastOrder.date 'DD.MM.YYYY HH:mm'}}<br />
               This was {{moment-from-now lastOrder.date}}<br />
-              The image was <br /><img src="images/{{lastOrder.image}}" class="last_order">
+              The image was <br /><img src="images/{{thumbnail lastOrder.image}}" class="last_order">
             {{else}}
               It looks like you have never made an order before
             {{/if}}
