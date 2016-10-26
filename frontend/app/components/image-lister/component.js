@@ -23,6 +23,18 @@ export default Ember.Component.extend({
   isDownEnabled: true,
 
   /**
+   * Do it with this
+   * https://guides.emberjs.com/v1.10.0/templates/writing-helpers/
+   */
+  makeThumbPath(image) {
+    let parts = image.split("\.")
+    let fileName = parts.slice(0, parts.length - 1).join('.')
+    let ext = parts.slice(parts.length -1)
+
+    return `${fileName}_thumb.${ext}`
+  },
+
+  /**
    * Retrieve the available images
    *
    * Get a list of available images from
@@ -40,7 +52,7 @@ export default Ember.Component.extend({
       '/api/v1/images',
       { data }
     ).then((res) => {
-      this.set('images', res.files)
+      this.set('images', res.files.map(this.makeThumbPath))
       this.set('max',    res.max)
     })
   },

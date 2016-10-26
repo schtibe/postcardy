@@ -29,7 +29,7 @@ function _listImages() {
 
   return files.filter((element) => {
     let ext = path.extname(element).toLowerCase()
-    return [ '.png', '.jpg' ].indexOf(ext) >= 0
+    return [ '.png', '.jpg' ].indexOf(ext) >= 0 && element.search("thumb") == -1
   })
 }
 
