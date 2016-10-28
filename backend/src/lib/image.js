@@ -29,7 +29,8 @@ function _listImages() {
 
   return files.filter((element) => {
     let ext = path.extname(element).toLowerCase()
-    return [ '.png', '.jpg' ].indexOf(ext) >= 0 && element.search("thumb") == -1
+    const NOT_FOUND = -1
+    return [ '.png', '.jpg' ].indexOf(ext) >= 0 && element.search('thumb') === NOT_FOUND
   })
 }
 
