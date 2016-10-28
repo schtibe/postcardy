@@ -1,6 +1,9 @@
 import Ember from 'ember'
 
 export function thumbnail([ value, ...rest ]) {
+  if (value == '') {
+    return ''
+  }
   let parts = value.split('.')
   let fileName = parts.slice(0, parts.length - 1).join('.')
   let ext = parts.slice(parts.length - 1)
