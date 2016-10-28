@@ -74,6 +74,24 @@ export default Ember.Route.extend({
       this.controller.set('isImageSet', true)
     },
     /**
+     * Delete an image
+     *
+     * @param {string} image The URL of the image
+     * @returns {void}
+     */
+    deleteImage(image) {
+      this.get('ajax').del(
+        '/api/v1/images', {
+          data: {
+            image: this.controller.get('model.imgURL')
+          }
+        }
+      ).then((res) => {
+        this.controller.set('model.imgURL', '')
+        this.controller.set('isImageSet', false)
+      })
+    },
+    /**
      * Unset an image
      * @returns {void}
      */
