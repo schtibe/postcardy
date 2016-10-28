@@ -90,13 +90,17 @@ function uploadImage() {
 
 /**
  * Create thumbnail from path
+ *
+ * @param {string} image - The image name to make a thumb of
+ * @param {function} callback - Callback after the thumb was created
  */
-function createThumb(image) {
+function createThumb(image, callback) {
   thumb({
     source: path.join(UPLOAD_LOCATION, image),
     destination: UPLOAD_LOCATION,
     width: 800
-  })
+  }, callback
+  )
 }
 
 export default {
