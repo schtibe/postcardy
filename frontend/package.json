@@ -48,6 +48,6 @@
     "postcss-responsive-type": "^0.4.0"
   },
   "dependencies": {
-    "loader.js": "^4.0.11",
+    "loader.js": "^4.0.11"
   }
 }
