@@ -63,9 +63,14 @@ function authorize(user, pw, success, error) {
  * @param {function} callbacks.success - Callback for success
  */
 function sendPostcard(user, pw, recipient, assetStream, message, callbacks) { // eslint-disable-line max-params
-  authorize(user, pw, (token) => {
-    _sendPostcard(token, recipient, assetStream, message, callbacks)
-  })
+  authorize(
+    user,
+    pw,
+    (token) => {
+      _sendPostcard(token, recipient, assetStream, message, callbacks)
+    },
+    callbacks['error']
+  )
 }
 
 export default sendPostcard
