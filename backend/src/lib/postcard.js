@@ -37,7 +37,8 @@ function _sendPostcard(token, recipient, assetStream, message, callbacks) { // e
 /**
  * @param {string} user - Username
  * @param {string} pw - Password
- * @param {function} callback - Call when the auth was successful
+ * @param {function} success - Call when the auth was successful
+ * @param {function} error - Call when the auth failed
  */
 function authorize(user, pw, success, error) {
   SSOHelper.getPostcardcreatorToken(
