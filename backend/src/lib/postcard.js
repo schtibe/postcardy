@@ -44,7 +44,7 @@ function authorize(user, pw, success, error) {
   SSOHelper.getPostcardcreatorToken(
     user, pw, (err, token) => {
       if (err) {
-        if (typeof error !== undefined) {
+        if (error) {
           error(`Unable to get token: ${err}`)
         }
       }
