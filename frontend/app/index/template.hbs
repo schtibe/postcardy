@@ -6,7 +6,7 @@
         <div class="column">
           <h2>Image</h2>
           <div class="uploader" style="display: {{if isImageSet "none" "block"}}">
-            {{file-uploader url="/api/v1/images" setImage=(route-action 'setImage')}}
+            {{file-uploader url="/api/v1/images" setImage=(route-action 'notifyUpload')}}
           </div>
 
           <div class="image" style="display: {{if isImageSet "block" "none"}}">
@@ -108,7 +108,7 @@
   </div> {{!-- postcard end --}}
 
   <div class="image_list">
-    {{image-lister choose=(route-action 'setImage')
+    {{image-lister choose=(route-action 'chooseImage')
       images=previousImages
       max=maxImages
       update=(route-action 'updateSlider')

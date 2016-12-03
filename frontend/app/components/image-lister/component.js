@@ -22,6 +22,15 @@ export default Ember.Component.extend({
    */
   isDownEnabled: true,
 
+  /**
+   * Notify an update to the component user
+   *
+   * @returns {void}
+   */
+  notifyUpdate() {
+    this.sendAction('update', this.get('from'), this.get('to'))
+  },
+
   actions: {
     /**
      * When a picture was chosen ('use')
@@ -39,7 +48,7 @@ export default Ember.Component.extend({
       this.set('from' , this.get('from') - 1)
       this.set('to'   , this.get('to')   - 1)
 
-      this.sendAction('update', this.get('from'), this.get('to'))
+      this.notifyUpdate()
     },
     /**
      * Down button was clicked. Shift the range
@@ -49,10 +58,12 @@ export default Ember.Component.extend({
       this.set('from' , this.get('from') + 1)
       this.set('to'   , this.get('to')   + 1)
 
-      this.sendAction('update', this.get('from'), this.get('to'))
+      this.notifyUpdate()
     },
     /**
      * Delete an image from the gallery
+     * @TODO this should actually be outside of the component too
+     * not sure yet how to organise this
      * @param {string} image - The image name
      * @returns {void}
      */
@@ -61,7 +72,7 @@ export default Ember.Component.extend({
         '/api/v1/images',
         { data: { image } }
       ).then((res) => {
-        this.getImages()
+        this.notifyUpdate()
       })
     }
   },

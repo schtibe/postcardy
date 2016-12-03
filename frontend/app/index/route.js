@@ -42,7 +42,7 @@ export default Ember.Route.extend({
     this.controller.set('result', '')
 
     this.getLastOrder()
-    this.getImages()
+    this.getPreviousImages()
   },
 
   setupController(controller, model) {
@@ -60,7 +60,7 @@ export default Ember.Route.extend({
    * @param {int} to - Range end
    * @returns {void}
    */
-  getImages (from, to) {
+  getPreviousImages (from, to) {
     const DEFAULT_RANGE_START = 0
     const DEFAULT_RANGE_END = 3
 
@@ -94,16 +94,24 @@ export default Ember.Route.extend({
     })
   },
 
+  /**
+   * Set an image
+   *
+   * @param {string} image The URL of the image
+   * @returns {void}
+   */
+  setImage(image) {
+    this.controller.set('model.imgURL', image)
+    this.controller.set('isImageSet', true)
+  },
+
   actions: {
-    /**
-     * Set an image
-     *
-     * @param {string} image The URL of the image
-     * @returns {void}
-     */
-    setImage(image) {
-      this.controller.set('model.imgURL', image)
-      this.controller.set('isImageSet', true)
+    notifyUpload(image) {
+      this.setImage(image)
+      this.getPreviousImages()
+    },
+    chooseImage(image) {
+      this.setImage(image)
     },
     /**
      * Delete an image
@@ -173,7 +181,7 @@ export default Ember.Route.extend({
      * @returns {void}
      */
     updateSlider(from, to) {
-      this.getImages(from, to)
+      this.getPreviousImages(from, to)
     }
   }
 })
