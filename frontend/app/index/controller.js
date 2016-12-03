@@ -31,5 +31,15 @@ export default Ember.Controller.extend({
   /**
    * The result string of sending a postcard
    */
-  result: ''
+  result: '',
+
+  /**
+   * List of the previously uploaded images
+   */
+  previousImages: [],
+
+  /**
+   * The count of the previously uploaded images
+   */
+  maxImages: null
 })

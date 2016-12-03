@@ -42,12 +42,44 @@ export default Ember.Route.extend({
     this.controller.set('result', '')
 
     this.getLastOrder()
+    this.getImages()
   },
 
   setupController(controller, model) {
     this._super(controller, model)
 
     this.initController()
+  },
+
+  /**
+   * Retrieve the available images
+   *
+   * Get a list of available images from
+   *
+   * @param {int} from - The range start
+   * @param {int} to - Range end
+   * @returns {void}
+   */
+  getImages (from, to) {
+    const DEFAULT_RANGE_START = 0
+    const DEFAULT_RANGE_END = 3
+
+    let data = {
+      /*
+      from: this.controller.get('from'),
+      to:   this.controller.get('to')
+      */
+      from: from || DEFAULT_RANGE_START,
+      to: to || DEFAULT_RANGE_END
+    }
+
+    this.get('ajax').request(
+      '/api/v1/images',
+      { data }
+    ).then((res) => {
+      this.controller.set('previousImages', res.files)
+      this.controller.set('maxImages',    res.max)
+    })
   },
 
   model() {
@@ -132,6 +164,16 @@ export default Ember.Route.extend({
 
         this.controller.set('isSending', false)
       })
+    },
+    /**
+     * Action to be attached to the image slider
+     *
+     * @param {int} from - Range start
+     * @param {int} to - Range end
+     * @returns {void}
+     */
+    updateSlider(from, to) {
+      this.getImages(from, to)
     }
   }
 })

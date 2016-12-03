@@ -108,6 +108,10 @@
   </div> {{!-- postcard end --}}
 
   <div class="image_list">
-    {{image-lister choose=(route-action 'setImage')}}
+    {{image-lister choose=(route-action 'setImage')
+      images=previousImages
+      max=maxImages
+      update=(route-action 'updateSlider')
+    }}
   </div>
 </div>

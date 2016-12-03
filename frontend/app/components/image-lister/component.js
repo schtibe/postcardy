@@ -4,10 +4,10 @@ import { on, observes } from 'ember-computed-decorators'
 export default Ember.Component.extend({
   ajax: Ember.inject.service(),
 
-  images: [],
-
   /**
    * Specify the range to display
+   *
+   * @TODO make those configurable default values
    */
   from:    0,
   to:      3,
@@ -22,28 +22,6 @@ export default Ember.Component.extend({
    */
   isDownEnabled: true,
 
-  /**
-   * Retrieve the available images
-   *
-   * Get a list of available images from
-   * the server as soon as we're loaded
-   */
-  @on('didInsertElement')
-  @observes('to')
-  getImages () {
-    let data = {
-      from: this.get('from'),
-      to:   this.get('to')
-    }
-
-    this.get('ajax').request(
-      '/api/v1/images',
-      { data }
-    ).then((res) => {
-      this.set('images', res.files)
-      this.set('max',    res.max)
-    })
-  },
   actions: {
     /**
      * When a picture was chosen ('use')
@@ -60,6 +38,8 @@ export default Ember.Component.extend({
     up() {
       this.set('from' , this.get('from') - 1)
       this.set('to'   , this.get('to')   - 1)
+
+      this.sendAction('update', this.get('from'), this.get('to'))
     },
     /**
      * Down button was clicked. Shift the range
@@ -68,6 +48,8 @@ export default Ember.Component.extend({
     down() {
       this.set('from' , this.get('from') + 1)
       this.set('to'   , this.get('to')   + 1)
+
+      this.sendAction('update', this.get('from'), this.get('to'))
     },
     /**
      * Delete an image from the gallery
