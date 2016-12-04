@@ -172,3 +172,23 @@ h1 {
 .last_order {
   height: 200px;
 }
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  border-color: #2e6da4;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}

@@ -15,8 +15,8 @@
               <div class="image_dimensions" />
             </div>
             <div>
-              <button class="btn" {{action "deleteImage"}}>Delete image</button>
-              <button class="btn" {{action "unsetImage"}}>Unset</button>
+              <div class="btn" {{action "deleteImage"}}>Delete image</div>
+              <div class="btn" {{action "unsetImage"}}>Unset</div>
             </div>
           </div>
         </div>
@@ -90,8 +90,10 @@
         <div class="column">
           <h2>Action!</h2>
           <div>
-            <button {{action 'send'}} class="action">Send Postcard</button>
-            <button {{action 'reset'}} class="action">Reset</button>
+            <div type="submit" {{action 'send'}} class="action btn btn-primary">
+              Send Postcard
+            </div>
+            <div {{action 'reset'}} class="action btn">Reset</div>
           </div>
           <div>
             {{#if isSending}}<progress />{{/if}}
