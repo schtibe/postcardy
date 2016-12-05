@@ -37,14 +37,16 @@ function _sendPostcard(token, recipient, assetStream, message, callbacks) { // e
 /**
  * @param {string} user - Username
  * @param {string} pw - Password
- * @param {function} callback - Call when the auth was successful
+ * @param {function} success - Call when the auth was successful
+ * @param {function} error - Call when the auth failed
  */
 function authorize(user, pw, success, error) {
   SSOHelper.getPostcardcreatorToken(
     user, pw, (err, token) => {
       if (err) {
-        if (typeof error !== undefined) {
+        if (error) {
           error(`Unable to get token: ${err}`)
+          return
         }
       }
       success(token)
@@ -63,9 +65,14 @@ function authorize(user, pw, success, error) {
  * @param {function} callbacks.success - Callback for success
  */
 function sendPostcard(user, pw, recipient, assetStream, message, callbacks) { // eslint-disable-line max-params
-  authorize(user, pw, (token) => {
-    _sendPostcard(token, recipient, assetStream, message, callbacks)
-  })
+  authorize(
+    user,
+    pw,
+    (token) => {
+      _sendPostcard(token, recipient, assetStream, message, callbacks)
+    },
+    callbacks['error']
+  )
 }
 
 export default sendPostcard

@@ -1,2 +1,4 @@
 config/data.json
+yarn.lock
+*.swp
 
