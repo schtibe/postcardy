@@ -46,6 +46,7 @@ function authorize(user, pw, success, error) {
       if (err) {
         if (error) {
           error(`Unable to get token: ${err}`)
+          return
         }
       }
       success(token)
