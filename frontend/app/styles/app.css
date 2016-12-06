@@ -176,7 +176,7 @@ h1 {
 .btn {
   border: 1px solid transparent;
   border-radius: 4px;
-  border-color: #2e6da4;
+  border-color: #519737;
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
@@ -189,6 +189,10 @@ h1 {
 
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #8da83d;
+}
+
+.btn:hover {
+  background-color: #b1ac40;
+  color: white;
 }
