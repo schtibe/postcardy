@@ -19,6 +19,12 @@ h1 {
   margin-top: 0;
 }
 
+input[type=text], input[type=number], textarea {
+  border: 1px solid rgba(49, 91, 33, .5);
+  border-radius: 4px;
+  padding: 7px 5px;
+}
+
 .root {
   display: flex;
   flex-direction: row;
@@ -140,9 +146,6 @@ h1 {
   flex-grow: 0;
 }
 
-.recipient_form input, .recipient_form label {
-  display: block;
-}
 
 .recipient_form label {
   font-size: 14px;
@@ -174,10 +177,10 @@ h1 {
 }
 
 .btn {
-  border: 1px solid transparent;
+  border: 1px solid rgba(49, 91, 33, .75);
   border-radius: 4px;
-  border-color: #519737;
   box-sizing: border-box;
+  box-shadow: 1px 1px 1px rgba(49, 91, 33, .5) ;
   cursor: pointer;
   display: inline-block;
   padding: 6px 12px;
@@ -188,11 +191,22 @@ h1 {
 }
 
 .btn-primary {
+  background-color: #96a862;
   color: #fff;
-  background-color: #8da83d;
 }
 
 .btn:hover {
-  background-color: #b1ac40;
+  background-color: #8da83d;
   color: white;
+}
+
+.btn.disabled {
+  color: grey;
+  border-color: grey;
+  box-shadow: unset;
+}
+
+.btn.disabled:hover {
+  background-color: white;
+  cursor: default;
 }
