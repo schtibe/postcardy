@@ -45,20 +45,24 @@ export default Ember.Component.extend({
      * @returns {void}
      */
     up() {
-      this.set('from' , this.get('from') - 1)
-      this.set('to'   , this.get('to')   - 1)
+      if (this.get('isUpEnabled')) {
+        this.set('from' , this.get('from') - 1)
+        this.set('to'   , this.get('to')   - 1)
 
-      this.notifyUpdate()
+        this.notifyUpdate()
+      }
     },
     /**
      * Down button was clicked. Shift the range
      * @returns {void}
      */
     down() {
-      this.set('from' , this.get('from') + 1)
-      this.set('to'   , this.get('to')   + 1)
+      if (this.get('isDownEnabled')) {
+        this.set('from' , this.get('from') + 1)
+        this.set('to'   , this.get('to')   + 1)
 
-      this.notifyUpdate()
+        this.notifyUpdate()
+      }
     },
     /**
      * Delete an image from the gallery
