@@ -1,7 +1,7 @@
 export default function() {
   this.namespace = '/api/v1'
-  this.timing = 400
   this.urlPrefix = ''
+  this.logging = true
 
   this.get('/addresses', () => {
     return {
@@ -16,6 +16,26 @@ export default function() {
       }
     }
   })
+
+  this.post('/postcards', () => {
+    return {
+      type: 'success',
+      message: 'Sent!'
+    }
+  }, { timing: 3000 })
+
+  this.get('/images', (...args) => {
+    return {
+      files: [
+        '/assets/test_images/1.jpg',
+        '/assets/test_images/2.jpg',
+        '/assets/test_images/3.jpg'//,
+        //'/assets/test_images/4.jpg'
+      ],
+      max: 4
+    }
+  })
+
 
   //this.passthrough()
 }
