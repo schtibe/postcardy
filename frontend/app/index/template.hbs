@@ -5,20 +5,22 @@
       <div class="row top_row">
         <div class="column">
           <h2>Image</h2>
-          <div class="uploader" style="display: {{if isImageSet "none" "block"}}">
-            {{file-uploader url="/api/v1/images" setImage=(route-action 'notifyUpload')}}
-          </div>
-
-          <div class="image" style="display: {{if isImageSet "block" "none"}}">
-            <div class="image_container">
-              <img id="chosenImage" src={{thumbnail model.imgURL}}>
-              <div class="image_dimensions" />
+          {{#if isImageSet}}
+            <div class="image">
+              <div class="image_container">
+                <img id="chosenImage" src={{thumbnail model.imgURL}}>
+                <div class="image_dimensions" />
+              </div>
+              <div>
+                <div class="btn" {{action "deleteImage"}}>Delete image</div>
+                <div class="btn" {{action "unsetImage"}}>Unset</div>
+              </div>
             </div>
-            <div>
-              <div class="btn" {{action "deleteImage"}}>Delete image</div>
-              <div class="btn" {{action "unsetImage"}}>Unset</div>
+          {{else}}
+            <div class="uploader">
+              {{file-uploader url="/api/v1/images" setImage=(route-action 'notifyUpload')}}
             </div>
-          </div>
+          {{/if}}
         </div>
 
         <div class="column">
