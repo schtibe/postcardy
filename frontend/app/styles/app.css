@@ -166,6 +166,12 @@ input[type=text], input[type=number], textarea {
   color: red;
 }
 
+.alert_warning {
+  background-color: #ffa162;
+  border: 1px solid orange;
+  color: black;
+}
+
 .alert_success {
   background-color: #d2ffb1;
   border: 1px solid green;

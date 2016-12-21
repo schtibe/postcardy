@@ -46,7 +46,8 @@
     "ember-moment": "7.1.1",
     "ember-route-action-helper": "2.0.1",
     "eslint": "^3.5.0",
-    "postcss-responsive-type": "^0.4.0"
+    "postcss-responsive-type": "^0.4.0",
+    "word-wrap": "1.1.0"
   },
   "dependencies": {
     "loader.js": "^4.0.11"
