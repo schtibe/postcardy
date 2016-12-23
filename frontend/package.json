@@ -2,26 +2,24 @@
   "name": "postcardy",
   "version": "0.0.0",
   "description": "Small description for postcardy goes here",
-  "private": true,
+  "license": "MIT",
+  "author": "",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
+  "repository": "",
   "scripts": {
     "build": "ember build",
     "start": "ember server --proxy=http://localhost:3000",
     "test": "ember test"
   },
-  "repository": "",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 0.12.0"
   },
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "^6.0.2",
     "broccoli-asset-rev": "^2.1.2",
-    "copy-dereference": "^1.0.0",
+    "ember-cli-babel": "^5.2.1",
     "ember-ajax": "2.5.2",
     "ember-cli": "2.10.0",
     "ember-cli-app-version": "^2.0.0",
@@ -36,20 +34,19 @@
     "ember-cli-qunit": "^3.0.1",
     "ember-cli-release": "^1.0.0-beta.2",
     "ember-cli-sri": "^2.1.1",
+    "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-cli-uploader": "^0.3.11",
     "ember-computed-decorators": "^0.2.2",
-    "ember-data": "^2.8.0",
-    "ember-disable-proxy-controllers": "^1.0.1",
+    "ember-data": "^2.10.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.6.3",
     "ember-moment": "7.1.1",
+    "ember-resolver": "2.1.0",
     "ember-route-action-helper": "2.0.1",
     "eslint": "^3.5.0",
-    "postcss-responsive-type": "^0.4.0",
-    "word-wrap": "1.1.0"
+    "loader.js": "^4.0.10",
+    "postcss-responsive-type": "^0.5.0"
   },
-  "dependencies": {
-    "loader.js": "^4.0.11"
-  }
+  "private": true
 }
