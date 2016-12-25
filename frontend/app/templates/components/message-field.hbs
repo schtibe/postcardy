@@ -1,0 +1,16 @@
+{{#if tooManyLines }}
+  {{!-- TODO would be nice to have this
+     next to the textarea. Couldn't do it--}}
+  <div class="alert alert_warning">
+    You should not go beyond 12 lines of Text! It might
+    have unexpected results otherwise.
+  </div>
+{{/if}}
+
+<div>
+  {{textarea type=text value=value cols="42" wrap="hard"}}
+  {{yield}}
+</div>
+
+
+
