@@ -11,7 +11,7 @@ before_install:
 install:
   - npm --prefix=frontend/ install -g bower
   - npm --prefix=frontend/ install
-  - cd frontend && bower install
+  - cd frontend && bower install && cd ..
 
 script:
   - npm --prefix=frontend/ test
