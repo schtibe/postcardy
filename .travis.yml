@@ -14,4 +14,4 @@ install:
   - cd frontend && bower install
 
 script:
-  ember --prefix=frontend/ test
+  - npm --prefix=frontend/ test
