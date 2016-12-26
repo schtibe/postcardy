@@ -1,6 +1,4 @@
-# Postcardy
-
-[![Build Status](https://travis-ci.org/schtibe/postcardy.svg?branch=master)](https://travis-ci.org/schtibe/postcardy)
+# Postcardy [![Build Status](https://travis-ci.org/schtibe/postcardy.svg?branch=master)](https://travis-ci.org/schtibe/postcardy)
 
 Ember application with a Node backend to easily send postcards via
 the free Postcard Service of the Swiss Post, where you can send a postcard 
