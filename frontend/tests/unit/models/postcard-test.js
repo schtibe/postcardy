@@ -2,9 +2,9 @@ import { expect } from 'chai'
 import { it, describe } from 'mocha'
 import { setupModelTest } from 'ember-mocha'
 
-describe('Unit | Model | image', function() {
-  setupModelTest('image', {
-    needs: [ 'model:postcard' ]
+describe('Unit | Model | postcard', function() {
+  setupModelTest('postcard', {
+    needs: [ 'model:image', 'model:address' ]
   })
 
   it('exists', function() {

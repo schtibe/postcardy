@@ -2,8 +2,6 @@ import Ember from 'ember'
 import moment from 'moment'
 
 export default Ember.Route.extend({
-  ajax: Ember.inject.service(),
-
   /**
    * Get the last order date
    *
@@ -151,6 +149,7 @@ export default Ember.Route.extend({
 
       let data = this.controller.get('model')
 
+      /*
       this.get('ajax').post(
         '/api/v1/postcards',
         { data }
@@ -166,6 +165,7 @@ export default Ember.Route.extend({
 
         this.controller.set('isSending', false)
       })
+      */
     },
     /**
      * Action to be attached to the image slider

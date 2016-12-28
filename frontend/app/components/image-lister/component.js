@@ -2,8 +2,6 @@ import Ember from 'ember'
 import { on, observes } from 'ember-computed-decorators'
 
 export default Ember.Component.extend({
-  ajax: Ember.inject.service(),
-
   /**
    * Specify the range to display
    *
@@ -72,12 +70,14 @@ export default Ember.Component.extend({
      * @returns {void}
      */
     deleteImage(image) {
+      /*
       this.get('ajax').del(
         '/api/v1/images',
         { data: { image } }
       ).then((res) => {
         this.notifyUpdate()
       })
+      */
     }
   },
   /**

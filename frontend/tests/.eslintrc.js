@@ -1,4 +1,4 @@
-{
+module.exports = {
   "parser": "babel-eslint",
   "root": true,
   "env": {
@@ -11,6 +11,11 @@
     "blockBindings": true,
     "modules": true,
     "module": true
+  },
+  "globals": {
+    "visit": true,
+    "andThen": true,
+    "server": true
   },
   "rules": {
     "comma-dangle": [2, "never"],
@@ -109,7 +114,7 @@
     "no-unexpected-multiline": 2,
     "no-unmodified-loop-condition": 2,
     "no-unreachable": 2,
-    "no-unused-expressions": 2,
+    "no-unused-expressions": 0,
     "no-unused-vars": 0,
     "no-unneeded-ternary": 2,
     "no-unsafe-finally": 2,

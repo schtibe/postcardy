@@ -1,4 +1,4 @@
-{
+module.exports = {
   "parser": "babel-eslint",
   "root": true,
   "env": {
@@ -68,7 +68,7 @@
     "no-lone-blocks": 2,
     "no-lonely-if": 2,
     "no-loop-func": 2,
-    "no-magic-numbers": 0,
+    "no-magic-numbers": [2, {"ignoreArrayIndexes": true, "ignore": [0, 1]}],
     "no-mixed-requires": [0, false],
     "no-multi-str": 2,
     "no-multiple-empty-lines": 2,

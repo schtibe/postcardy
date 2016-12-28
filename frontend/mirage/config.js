@@ -3,7 +3,7 @@ export default function() {
   this.urlPrefix = ''
   this.logging = true
 
-  this.get('/addresses/default', ( { addresses } , request) => {
+  this.get('/addresses/default', ({ addresses } , request) => {
     return addresses.first()
   })
 

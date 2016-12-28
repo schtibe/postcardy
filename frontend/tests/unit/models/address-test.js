@@ -1,12 +1,14 @@
-import { moduleForModel, test } from 'ember-qunit';
+import { expect } from 'chai'
+import { it, describe } from 'mocha'
+import { setupModelTest } from 'ember-mocha'
 
-moduleForModel('address', 'Unit | Model | address', {
-  // Specify the other units that are required for this test.
-  needs: []
-});
+describe('Unit | Model | address', function() {
+  setupModelTest('address', {
+  })
 
-test('it exists', function(assert) {
-  let model = this.subject();
-  // let store = this.store();
-  assert.ok(!!model);
-});
+  it('exists', function() {
+    let model = this.subject()
+    // let store = this.store()
+    expect(model).to.be.ok
+  })
+})
