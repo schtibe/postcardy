@@ -15,4 +15,6 @@ App = Ember.Application.extend({
 
 loadInitializers(App, config.modulePrefix)
 
+window.Promise = Ember.RSVP.Promise
+
 export default App
