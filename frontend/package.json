@@ -11,15 +11,15 @@
   "repository": "",
   "scripts": {
     "build": "ember build",
-    "start": "ember server --proxy=http://localhost:3000",
+    "start": "ember server",
     "test": "ember test"
   },
   "engines": {
     "node": ">= 0.12.0"
   },
   "devDependencies": {
+    "babel-polyfill": "6.20.0",
     "broccoli-asset-rev": "^2.1.2",
-    "ember-cli-babel": "^5.2.1",
     "ember-ajax": "2.5.2",
     "ember-cli": "2.10.0",
     "ember-cli-app-version": "^2.0.0",

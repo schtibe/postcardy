@@ -7,5 +7,5 @@ export default DS.Model.extend({
   familyName : DS.attr('string'),
   street     : DS.attr('string'),
   postCode   : DS.attr('string'),
-  place      : DS.attr('place')
+  place      : DS.attr('string')
 })

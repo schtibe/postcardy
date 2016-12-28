@@ -3,8 +3,8 @@ export default function() {
   this.urlPrefix = ''
   this.logging = true
 
-  this.get('/addresses/default', ({ addresses }, request) => {
-    return adresses.first()
+  this.get('/addresses/default', ( { addresses } , request) => {
+    return addresses.first()
   })
 
   this.post('/postcards', () => {

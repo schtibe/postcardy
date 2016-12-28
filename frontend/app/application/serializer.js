@@ -1,9 +1,4 @@
-import DS from 'ember-data';
+import DS from 'ember-data'
 
-export default DS.RESTSerializer.extend({
-  primaryKey: '_id',
-
-  serializeId(id) {
-    return id.toString();
-  }
-});
+export default DS.JSONAPISerializer.extend({
+})

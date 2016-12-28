@@ -10,21 +10,13 @@ export default Ember.Route.extend({
    * @returns {void}
    */
   getLastOrder() {
+    /*
     this.get('ajax').request(
       '/api/v1/postcards/last'
     ).then((res) => {
       this.controller.set('lastOrder', res.data)
     })
-  },
-
-  /**
-   * Get the default address
-   * @returns {void}
-   */
-  getDefaultAddress() {
-    return this.get('ajax').request(
-      '/api/v1/addresses'
-    )
+    */
   },
 
   /**
@@ -73,6 +65,7 @@ export default Ember.Route.extend({
       to: to || DEFAULT_RANGE_END
     }
 
+        /*
     this.get('ajax').request(
       '/api/v1/images',
       { data }
@@ -80,18 +73,17 @@ export default Ember.Route.extend({
       this.controller.set('previousImages', res.files)
       this.controller.set('maxImages',    res.max)
     })
+    */
   },
 
-  model() {
-    return new Ember.RSVP.Promise((resolve) => {
-      this.getDefaultAddress().then(res => {
-        resolve({
-          recipient: res.data,
-          imgURL: '',
-          message: moment().format('DD.MM.YYYY')
-        })
-      })
+  async model() {
+    let address = await this.get('store').findRecord('address', 'default')
+    let message = moment().format('DD.MM.YYYY')
+    return this.get('store').createRecord('postcard', {
+      message,
+      recipient: address
     })
+
   },
 
   /**
@@ -120,6 +112,7 @@ export default Ember.Route.extend({
      * @returns {void}
      */
     deleteImage(image) {
+      /*
       this.get('ajax').del(
         '/api/v1/images', {
           data: {
@@ -130,6 +123,7 @@ export default Ember.Route.extend({
         this.controller.set('model.imgURL', '')
         this.controller.set('isImageSet', false)
       })
+      */
     },
     /**
      * Unset an image
