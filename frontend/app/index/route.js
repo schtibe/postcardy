@@ -63,7 +63,9 @@ export default Ember.Route.extend({
       to: to || DEFAULT_RANGE_END
     }
 
-        /*
+    return this.get('store').query('image', { from, to })
+
+    /*
     this.get('ajax').request(
       '/api/v1/images',
       { data }

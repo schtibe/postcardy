@@ -5,6 +5,6 @@ export default Factory.extend({
     return `Image ${i}`
   },
   URL() {
-    return faker.image.imageURL()
+    return faker.image.imageUrl()
   }
 })

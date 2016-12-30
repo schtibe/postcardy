@@ -9,4 +9,5 @@ export default function(server) {
 
   // server.createList('post', 10);
   server.createList('address', 5)
+  server.createList('image', 10)
 }

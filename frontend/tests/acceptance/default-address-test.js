@@ -6,6 +6,7 @@ import destroyApp from '../helpers/destroy-app'
 
 const { $ } = Ember
 
+
 describe('Acceptance | home', function() {
   let application
 
