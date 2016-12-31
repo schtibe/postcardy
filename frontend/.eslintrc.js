@@ -135,7 +135,7 @@ module.exports = {
     "func-style": 0,
     "guard-for-in": 2,
     "max-depth": [1, 4],
-    "max-len": [0, 80, 4],
+    "max-len": [2, 80, 4],
     "max-nested-callbacks": [2, 2],
     "max-params": [2, 4],
     "max-statements": [2, 10],

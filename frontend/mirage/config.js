@@ -21,9 +21,15 @@ export default function() {
     return images.all()
   })
 
+  this.get('/images/:id', ({ images}, request) => {
+    let id = request.params.id
+
+    return images.find(id)
+  })
+
   this.get('/postcards/last', ({ postcards }, request) => {
     return postcards.first()
   })
 
-  //this.passthrough()
+  // this.passthrough()
 }

@@ -50,30 +50,16 @@ export default Ember.Route.extend({
    * @param {int} to - Range end
    * @returns {void}
    */
-  getPreviousImages (from, to) {
+  async getPreviousImages (from, to) {
     const DEFAULT_RANGE_START = 0
     const DEFAULT_RANGE_END = 3
 
-    let data = {
-      /*
-      from: this.controller.get('from'),
-      to:   this.controller.get('to')
-      */
-      from: from || DEFAULT_RANGE_START,
-      to: to || DEFAULT_RANGE_END
-    }
+    from = from || DEFAULT_RANGE_START
+    to   =   to || DEFAULT_RANGE_END
 
-    return this.get('store').query('image', { from, to })
-
-    /*
-    this.get('ajax').request(
-      '/api/v1/images',
-      { data }
-    ).then((res) => {
-      this.controller.set('previousImages', res.files)
-      this.controller.set('maxImages',    res.max)
-    })
-    */
+    let data = await this.get('store').query('image', { from, to })
+    this.controller.set('maxImages', data.meta.max)
+    this.controller.set('previousImages', data)
   },
 
   async model() {
@@ -92,8 +78,9 @@ export default Ember.Route.extend({
    * @param {string} image The URL of the image
    * @returns {void}
    */
-  setImage(image) {
-    this.controller.set('model.imgURL', image)
+  async setImage(id) {
+    let image = await this.get('store').findRecord('image', id)
+    this.controller.set('model.image', image)
     this.controller.set('isImageSet', true)
   },
 
@@ -102,8 +89,8 @@ export default Ember.Route.extend({
       this.setImage(image)
       this.getPreviousImages()
     },
-    chooseImage(image) {
-      this.setImage(image)
+    chooseImage(id) {
+      this.setImage(id)
     },
     /**
      * Delete an image
@@ -130,7 +117,7 @@ export default Ember.Route.extend({
      * @returns {void}
      */
     unsetImage() {
-      this.controller.set('model.imgURL', '')
+      this.controller.set('model.image', '')
       this.controller.set('isImageSet', false)
     },
     /**

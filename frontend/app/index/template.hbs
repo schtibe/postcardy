@@ -8,7 +8,7 @@
           {{#if isImageSet}}
             <div class="image">
               <div class="image_container">
-                <img id="chosenImage" src={{thumbnail model.imgURL}}>
+                <img id="chosenImage" src={{model.image.url}}>
                 <div class="image_dimensions" />
               </div>
               <div>
@@ -116,6 +116,7 @@
       images=previousImages
       max=maxImages
       update=(route-action 'updateSlider')
+      delete=(route-action 'deleteImage')
     }}
   </div>
 </div>

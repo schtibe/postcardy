@@ -7,7 +7,7 @@ import destroyApp from '../helpers/destroy-app'
 const { $ } = Ember
 
 
-describe('Acceptance | home', function() {
+describe('Acceptance | index', function() {
   let application
 
   beforeEach(function() {
@@ -30,5 +30,15 @@ describe('Acceptance | home', function() {
     expect($('.recipient_street').val()).to.equal(address.street)
     expect($('.recipient_postCode').val()).to.equal(address.postCode)
     expect($('.recipient_place').val()).to.equal(address.place)
+  })
+
+  it('sets a chosen image correctly', async function() {
+    let address = await server.create('address')
+    let images = await server.createList('image', 3)
+
+    await visit('/')
+
+    $('.buttonbar:first a:first').click()
+    expect($('#chosenImage').attr('src')).to.equal(images[0].url)
   })
 })
