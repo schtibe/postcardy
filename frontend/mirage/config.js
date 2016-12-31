@@ -27,9 +27,15 @@ export default function() {
     return images.find(id)
   })
 
+  this.del('/images/:id', (schema, request) => {
+    let id = request.params.id
+
+    return schema.db.images.remove(id)
+  })
+
   this.get('/postcards/last', ({ postcards }, request) => {
     return postcards.first()
   })
 
-  // this.passthrough()
+  //this.passthrough()
 }

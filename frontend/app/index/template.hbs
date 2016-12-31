@@ -108,15 +108,15 @@
      </div>
 
     </form>
-
   </div> {{!-- postcard end --}}
 
   <div class="image_list">
-    {{image-lister choose=(route-action 'chooseImage')
+    {{image-lister
       images=previousImages
       max=maxImages
       update=(route-action 'updateSlider')
       delete=(route-action 'deleteImage')
+      choose=(route-action 'chooseImage')
     }}
   </div>
 </div>

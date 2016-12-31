@@ -64,20 +64,11 @@ export default Ember.Component.extend({
     },
     /**
      * Delete an image from the gallery
-     * @TODO this should actually be outside of the component too
-     * not sure yet how to organise this
-     * @param {string} image - The image name
+     * @param {image} image - The image
      * @returns {void}
      */
     deleteImage(image) {
-      /*
-      this.get('ajax').del(
-        '/api/v1/images',
-        { data: { image } }
-      ).then((res) => {
-        this.notifyUpdate()
-      })
-      */
+      this.sendAction('delete', image)
     }
   },
   /**

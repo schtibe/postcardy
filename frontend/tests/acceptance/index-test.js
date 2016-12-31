@@ -41,4 +41,21 @@ describe('Acceptance | index', function() {
     $('.buttonbar:first a:first').click()
     expect($('#chosenImage').attr('src')).to.equal(images[0].url)
   })
+
+  it.skip('deletes an image correctly', async function() {
+    let address = await server.create('address')
+    let images = await server.createList('image', 3)
+
+    await visit('/')
+
+    // let's use one first
+    $('.buttonbar:first a:first').click()
+    expect($('#chosenImage').attr('src')).to.equal(images[0].url)
+
+    // now delete it
+    $('.buttonbar:first a:last').click()
+    expect($('#chosenImage').attr('src')).to.equal('')
+
+    expect($('.img-lister img').attr('src')).to.not.equal(images[0].url)
+  })
 })
