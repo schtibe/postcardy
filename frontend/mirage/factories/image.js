@@ -5,6 +5,6 @@ export default Factory.extend({
     return `Image ${i}`
   },
   url() {
-    return faker.image.imageUrl()
+    return `${faker.image.imageUrl()}?${faker.random.uuid()}`
   }
 })

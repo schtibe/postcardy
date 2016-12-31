@@ -21,7 +21,7 @@ export default function() {
     return images.all()
   })
 
-  this.get('/images/:id', ({ images}, request) => {
+  this.get('/images/:id', ({ images }, request) => {
     let id = request.params.id
 
     return images.find(id)

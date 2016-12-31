@@ -78,8 +78,7 @@ export default Ember.Route.extend({
    * @param {string} image The URL of the image
    * @returns {void}
    */
-  async setImage(id) {
-    let image = await this.get('store').findRecord('image', id)
+  async setImage(image) {
     this.controller.set('model.image', image)
     this.controller.set('isImageSet', true)
   },
@@ -89,8 +88,8 @@ export default Ember.Route.extend({
       this.setImage(image)
       this.getPreviousImages()
     },
-    chooseImage(id) {
-      this.setImage(id)
+    chooseImage(image) {
+      this.setImage(image)
     },
     /**
      * Delete an image
