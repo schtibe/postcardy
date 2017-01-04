@@ -1,21 +1,18 @@
 export default function() {
   this.namespace = '/api/v1'
   this.urlPrefix = ''
-  this.logging = true
 
   this.get('/addresses/default', ({ addresses } , request) => {
     return addresses.first()
   })
 
-  this.post('/postcards', () => {
-    // TODO: how to respond success in jsonapi?
-    /*
-    return {
-      type: 'success',
-      message: 'Sent!'
-    }
-    */
-  }, { timing: 3000 })
+  this.post('/postcards', (schema, request) => {
+    let data = JSON.parse(request.requestBody).data.attributes
+    let address = JSON.parse(request.requestBody).data.relationships.recipient
+
+    schema.addresses.create(address)
+    return schema.postcards.create(data)
+  }, { timing: 500 })
 
   this.get('/images', ({ images }, request) => {
     return images.all()

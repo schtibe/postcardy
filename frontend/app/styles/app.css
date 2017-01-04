@@ -216,3 +216,7 @@ input[type=text], input[type=number], textarea {
   background-color: white;
   cursor: default;
 }
+
+.btn.disabled.btn-primary:hover {
+  background-color: #8da83d;
+}

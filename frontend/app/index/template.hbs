@@ -92,7 +92,7 @@
         <div class="column">
           <h2>Action!</h2>
           <div>
-            <div type="submit" {{action 'send'}} class="action btn btn-primary">
+            <div type="submit" {{action 'send'}} class="action btn btn-primary {{unless model.isNew 'disabled'}}">
               Send Postcard
             </div>
             <div {{action 'reset'}} class="action btn">Reset</div>

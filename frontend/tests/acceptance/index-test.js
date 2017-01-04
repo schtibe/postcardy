@@ -100,3 +100,54 @@ describe('Acceptance | index | delete image', function() {
     $('.buttonbar:first a:last').click()
   })
 })
+
+describe('Acceptance | index | send postcard', function() {
+  let application
+
+  beforeEach(function() {
+    application = startApp()
+  })
+
+  afterEach(function() {
+    destroyApp(application)
+  })
+
+  it('Shows an error when no image is set', async function() {
+    let address = await server.create('address')
+    let images  = await server.createList('image', 3)
+
+    await visit('/')
+
+    $('.btn-primary').click()
+    expect($('.alert')).to.be.visible
+    expect($('.alert').hasClass('alert_error')).to.be.true
+    expect($('.alert').text().trim()).to.equal('No image defined!')
+  })
+
+  it('Correctly sends a basic postcard', async function() {
+    let address = await server.create('address')
+    let images  = await server.createList('image', 3)
+
+    server.post('/postcards', (schema, request) => {
+      // TODO ensure that this is happening
+      // https://github.com/mochajs/mocha/wiki/Assertion-counting
+      let data  = JSON.parse(request.requestBody)
+      let attrs = data.attributes
+      let rels  = data.relationships
+
+      expect(attrs.message.trim()).to.equal('test-message')
+      expect(rels.image.data.id).to.equal(images[0].id)
+    })
+
+    await visit('/')
+
+    $('.buttonbar:first a:last').click()
+    $('textarea').text('test-message')
+    $('.btn-primary').click()
+  })
+
+  it.skip('Correctly stores the postcard')
+
+  it.skip('Shows error messages')
+})
+

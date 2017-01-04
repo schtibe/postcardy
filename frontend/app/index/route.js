@@ -46,16 +46,16 @@ export default Ember.Route.extend({
    *
    * Get a list of available images from
    *
-   * @param {int} from - The range start
-   * @param {int} to - Range end
+   * @param {int} _from - The range start
+   * @param {int} _to - Range end
    * @returns {void}
    */
-  async getPreviousImages (from, to) {
+  async getPreviousImages (_from, _to) {
     const DEFAULT_RANGE_START = 0
     const DEFAULT_RANGE_END = 3
 
-    from = from || DEFAULT_RANGE_START
-    to   =   to || DEFAULT_RANGE_END
+    let from = _from || DEFAULT_RANGE_START
+    let to   =   _to || DEFAULT_RANGE_END
 
     let data = await this.get('store').query('image', { from, to })
     this.controller.set('maxImages', data.meta.max)
@@ -123,29 +123,29 @@ export default Ember.Route.extend({
      * Send the postcard
      * @returns {void}
      */
-    send() {
+    async send() {
+      let model = this.controller.get('model')
+
+      if (!model.get('isNew')) {
+        return
+      }
+
+      if (!model.get('image.id')) {
+        this.controller.set('result', 'No image defined!')
+        this.controller.set('resultClass', 'error')
+        return
+      }
+
+      // TODO all this necessary like this?
+      this.controller.set('result', '')
       this.controller.set('isSending', true)
       this.controller.set('resultClass', '')
 
-      let data = this.controller.get('model')
+      await model.save()
 
-      /*
-      this.get('ajax').post(
-        '/api/v1/postcards',
-        { data }
-      ).then((res) => {
-        this.controller.set('result',      res.message)
-        this.controller.set('resultClass', res.type)
-
-        this.getLastOrder()
-        this.controller.set('isSending', false)
-      }).catch((error) => {
-        this.controller.set('result', `Error requesting the order: ${error}`)
-        this.controller.set('resultClass', 'error')
-
-        this.controller.set('isSending', false)
-      })
-      */
+      this.controller.set('isSending', false)
+      this.controller.set('result', 'Sent!')
+      this.controller.set('resultClass', 'success')
     },
     /**
      * Action to be attached to the image slider
