@@ -7,7 +7,7 @@ import destroyApp from '../helpers/destroy-app'
 const { $ } = Ember
 
 
-describe('Acceptance | index', function() {
+describe('Acceptance | index | default address', function() {
   let application
 
   beforeEach(function() {
@@ -18,7 +18,7 @@ describe('Acceptance | index', function() {
     destroyApp(application)
   })
 
-  it('renders the default address correctly', async function() {
+  it('renders  correctly', async function() {
     let address = await server.create('address')
 
     await visit('/')
@@ -31,6 +31,18 @@ describe('Acceptance | index', function() {
     expect($('.recipient_postCode').val()).to.equal(address.postCode)
     expect($('.recipient_place').val()).to.equal(address.place)
   })
+})
+
+describe('Acceptance | index | chose image', function() {
+  let application
+
+  beforeEach(function() {
+    application = startApp()
+  })
+
+  afterEach(function() {
+    destroyApp(application)
+  })
 
   it('sets a chosen image correctly', async function() {
     let address = await server.create('address')
@@ -41,8 +53,20 @@ describe('Acceptance | index', function() {
     $('.buttonbar:first a:first').click()
     expect($('#chosenImage').attr('src')).to.equal(images[0].url)
   })
+})
 
-  it.skip('deletes an image correctly', async function() {
+describe('Acceptance | index | delete image', function() {
+  let application
+
+  beforeEach(function() {
+    application = startApp()
+  })
+
+  afterEach(function() {
+    destroyApp(application)
+  })
+
+  it.skip('removes it from the chosenImage', async function() {
     let address = await server.create('address')
     let images = await server.createList('image', 3)
 
@@ -57,5 +81,22 @@ describe('Acceptance | index', function() {
     expect($('#chosenImage').attr('src')).to.equal('')
 
     expect($('.img-lister img').attr('src')).to.not.equal(images[0].url)
+  })
+
+  it('correctly sends the request', async function() {
+    let address = await server.create('address')
+    let images  = await server.createList('image', 3)
+
+    server.del('/images/:id', (schema, request) => {
+      let id = request.params.id
+
+      // TODO: there should be a way to assert
+      // that this is happening
+      expect(id).to.equal(images[0].id)
+    })
+
+    await visit('/')
+
+    $('.buttonbar:first a:last').click()
   })
 })
