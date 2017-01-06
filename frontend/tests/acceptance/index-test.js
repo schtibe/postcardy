@@ -147,12 +147,17 @@ describe('Acceptance | index | send postcard', function() {
 
       expect(attrs.message.trim()).to.equal('test-message')
       expect(rels.image.data.id).to.equal(images[0].id)
+      //expect(rels.address.data.id).to.equal(address[0].id)
+
+      // needs to be done so the app will continue
+      return schema.postcards.create(data)
     })
 
     await visit('/')
 
     $('.buttonbar:first .img-use').click()
-    $('textarea').text('test-message')
+    $('textarea').val('test-message')
+    $('textarea').change()
     $('.btn-primary').click()
   })
 
