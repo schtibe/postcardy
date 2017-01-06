@@ -1,10 +1,13 @@
 import Ember from 'ember'
 import { describe, it, beforeEach, afterEach } from 'mocha'
-import { expect } from 'chai'
-import startApp from '../helpers/start-app'
+
+import startApp   from '../helpers/start-app'
 import destroyApp from '../helpers/destroy-app'
+import Plan       from '../helpers/test-plan'
 
 const { $ } = Ember
+
+let expect = Plan.expect
 
 
 describe('Acceptance | index | default address', function() {
@@ -37,6 +40,7 @@ describe('Acceptance | index | chose image', function() {
   let application
 
   beforeEach(function() {
+    server.shutdown()
     application = startApp()
   })
 
@@ -59,11 +63,14 @@ describe('Acceptance | index | delete image', function() {
   let application
 
   beforeEach(function() {
+    server.shutdown()
+    Plan.reset()
     application = startApp()
   })
 
   afterEach(function() {
     destroyApp(application)
+    Plan.check()
   })
 
   it.skip('removes it from the chosenImage', async function() {
@@ -84,6 +91,7 @@ describe('Acceptance | index | delete image', function() {
   })
 
   it('correctly sends the request', async function() {
+    Plan.plan(1)
     let address = await server.create('address')
     let images  = await server.createList('image', 3)
 
@@ -105,11 +113,14 @@ describe('Acceptance | index | send postcard', function() {
   let application
 
   beforeEach(function() {
+    server.shutdown()
+    Plan.reset()
     application = startApp()
   })
 
   afterEach(function() {
     destroyApp(application)
+    Plan.check()
   })
 
   it('Shows an error when no image is set', async function() {
@@ -125,13 +136,12 @@ describe('Acceptance | index | send postcard', function() {
   })
 
   it('Correctly sends a basic postcard', async function() {
+    Plan.plan(2)
     let address = await server.create('address')
     let images  = await server.createList('image', 3)
 
     server.post('/postcards', (schema, request) => {
-      // TODO ensure that this is happening
-      // https://github.com/mochajs/mocha/wiki/Assertion-counting
-      let data  = JSON.parse(request.requestBody)
+      let data  = JSON.parse(request.requestBody).data
       let attrs = data.attributes
       let rels  = data.relationships
 
@@ -141,7 +151,7 @@ describe('Acceptance | index | send postcard', function() {
 
     await visit('/')
 
-    $('.buttonbar:first a:last').click()
+    $('.buttonbar:first .img-use').click()
     $('textarea').text('test-message')
     $('.btn-primary').click()
   })
