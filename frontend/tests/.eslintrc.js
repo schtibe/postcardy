@@ -15,7 +15,11 @@ module.exports = {
   "globals": {
     "visit": true,
     "andThen": true,
-    "server": true
+    "server": true,
+    "triggerEvent": true,
+    "fillIn": true,
+    "click": true,
+    "keyEvent": true
   },
   "rules": {
     "comma-dangle": [2, "never"],
@@ -143,7 +147,7 @@ module.exports = {
     "max-len": [0, 80, 4],
     "max-nested-callbacks": [2, 3],
     "max-params": [2, 4],
-    "max-statements": [2, 10],
+    "max-statements": [0, 10],
     "new-cap": 2,
     "new-parens": 0,
     "one-var": 0,

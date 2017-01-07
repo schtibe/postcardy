@@ -135,8 +135,8 @@ describe('Acceptance | index | send postcard', function() {
     expect($('.alert').text().trim()).to.equal('No image defined!')
   })
 
-  it('Correctly sends a basic postcard', async function() {
-    Plan.plan(2)
+  it('Correctly sends a basic postcard with the default address', async function() {
+    Plan.plan(3)
     let address = await server.create('address')
     let images  = await server.createList('image', 3)
 
@@ -147,21 +147,61 @@ describe('Acceptance | index | send postcard', function() {
 
       expect(attrs.message.trim()).to.equal('test-message')
       expect(rels.image.data.id).to.equal(images[0].id)
-      //expect(rels.address.data.id).to.equal(address[0].id)
+      expect(rels.recipient.data.id).to.equal(address.id)
 
       // needs to be done so the app will continue
-      return schema.postcards.create(data)
+      return schema.postcards.create(attrs)
     })
 
     await visit('/')
 
-    $('.buttonbar:first .img-use').click()
-    $('textarea').val('test-message')
-    $('textarea').change()
-    $('.btn-primary').click()
+    await click('.buttonbar:first .img-use')
+    await fillIn('textarea', 'test-message')
+    await triggerEvent('textarea', 'change')
+    await click('.btn-primary')
   })
 
-  it.skip('Correctly stores the postcard')
+  it('Correctly sends a basic postcard with a new address', async function() {
+    Plan.plan(4)
+    let address = await server.create('address')
+    let images  = await server.createList('image', 3)
+
+    let newAddress = null
+
+    server.post('/addresses', (schema, request) => {
+      let data  = JSON.parse(request.requestBody).data
+      let attrs = data.attributes
+
+      newAddress = schema.addresses.create(attrs)
+      expect(attrs['given-name']).to.equal('Boba')
+      expect(attrs['family-name']).to.equal('Fett')
+
+      expect(newAddress).to.be.ok
+
+      return newAddress
+    })
+
+    server.post('/postcards', (schema, request) => {
+      let data  = JSON.parse(request.requestBody).data
+      let attrs = data.attributes
+      let rels  = data.relationships
+
+      expect(rels.recipient.data.id).to.equal(newAddress.id)
+
+      return schema.postcards.create(attrs)
+    })
+
+    await visit('/')
+
+    await click('.buttonbar:first .img-use')
+
+    await fillIn('.recipient_givenName', 'Boba')
+    await fillIn('.recipient_familyName', 'Fett')
+
+    await triggerEvent('.recipient_familyName', 'change')
+
+    await click('.btn-primary')
+  })
 
   it.skip('Shows error messages')
 })

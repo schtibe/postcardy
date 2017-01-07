@@ -44,40 +44,40 @@
           <div class="row">
             <div class="column">
               <label>Company</label>
-              {{input type="text" class="recipient_company" value=model.recipient.company}}
+              {{input type="text" class="recipient_company" value=model.recipient.company change=(route-action "changeAddress")}}
             </div>
             <div class="column">
               <label>Salutation</label>
-              {{input type="text" class="recipient_salutation" value=model.recipient.salutation}}
+              {{input type="text" class="recipient_salutation" value=model.recipient.salutation change=(route-action "changeAddress")}}
             </div>
           </div>
 
           <div class="row">
             <div class="column">
               <label>Given Name</label>
-              {{input type="text" class="recipient_givenName" value=model.recipient.givenName}}
+              {{input type="text" class="recipient_givenName" value=model.recipient.givenName change=(route-action "changeAddress")}}
             </div>
             <div class="column">
               <label>Family Name</label>
-              {{input type="text" class="recipient_familyName" value=model.recipient.familyName}}
+              {{input type="text" class="recipient_familyName" value=model.recipient.familyName change=(route-action "changeAddress")}}
             </div>
           </div>
 
           <div class="row">
             <div class="column">
               <label>Street</label>
-              {{input type="text" class="recipient_street" value=model.recipient.street}}
+              {{input type="text" class="recipient_street" value=model.recipient.street change=(route-action "changeAddress")}}
             </div>
           </div>
           <div class="row">
             <div class="column post_code">
               <label>Post Code</label>
-              {{input type="number" min="1000" max="9999" class="recipient_postCode" value=model.recipient.postCode}}
+              {{input type="number" min="1000" max="9999" class="recipient_postCode" value=model.recipient.postCode change=(route-action "changeAddress")}}
             </div>
 
             <div class="column">
               <label>Place</label>
-              {{input type="text" class="recipient_place" value=model.recipient.place}}
+              {{input type="text" class="recipient_place" value=model.recipient.place change=(route-action "changeAddress")}}
             </div>
           </div>
         </div>

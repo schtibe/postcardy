@@ -6,12 +6,25 @@ export default function() {
     return addresses.first()
   })
 
-  this.post('/postcards', (schema, request) => {
-    let data = JSON.parse(request.requestBody).data.attributes
-    let address = JSON.parse(request.requestBody).data.relationships.recipient
+  this.get('/addresses/:id', (schema, request) => {
+    return schema.addresses.find(request.params.id)
+  })
 
-    schema.addresses.create(address)
-    return schema.postcards.create(data)
+  this.post('/addresses', (schema, request) => {
+    let data = JSON.parse(request.requestBody).data.attributes
+
+    return schema.addresses.create(data)
+  })
+
+  this.post('/postcards', (schema, request) => {
+    let data = JSON.parse(request.requestBody).data
+    let attrs = data.attributes
+    let rels  = data.relationships
+
+    attrs.recipientId = rels.recipient.data.id
+    attrs.imageId     = rels.image.data.id
+
+    return schema.postcards.create(attrs)
   }, { timing: 500 })
 
   this.get('/images', ({ images }, request) => {
