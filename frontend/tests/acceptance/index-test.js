@@ -40,7 +40,6 @@ describe('Acceptance | index | chose image', function() {
   let application
 
   beforeEach(function() {
-    server.shutdown()
     application = startApp()
   })
 
@@ -63,7 +62,6 @@ describe('Acceptance | index | delete image', function() {
   let application
 
   beforeEach(function() {
-    server.shutdown()
     Plan.reset()
     application = startApp()
   })
@@ -113,7 +111,6 @@ describe('Acceptance | index | send postcard', function() {
   let application
 
   beforeEach(function() {
-    server.shutdown()
     Plan.reset()
     application = startApp()
   })

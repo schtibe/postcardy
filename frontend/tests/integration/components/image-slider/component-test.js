@@ -1,11 +1,20 @@
 import { expect } from 'chai'
-import { describe, it } from 'mocha'
+import { describe, it, beforeEach, afterEach } from 'mocha'
 import { setupComponentTest } from 'ember-mocha'
+import { startMirage } from 'postcardy/initializers/ember-cli-mirage'
 import hbs from 'htmlbars-inline-precompile'
 
 describe('Integration | Component | image slider', function() {
   setupComponentTest('image-lister', {
     integration: true
+  })
+
+  beforeEach(function() {
+    this.server = startMirage()
+  })
+
+  afterEach(function() {
+    this.server.shutdown()
   })
 
   it('renders', function() {
@@ -14,7 +23,7 @@ describe('Integration | Component | image slider', function() {
   })
 
   it('shows three images', async function() {
-    let images = await server.createList('image', 3)
+    let images = await this.server.createList('image', 3)
 
     this.set('images', images)
     this.set('max', 3)
@@ -24,7 +33,7 @@ describe('Integration | Component | image slider', function() {
   })
 
   it('can set an image', async function() {
-    let images = await server.createList('image', 3)
+    let images = await this.server.createList('image', 3)
 
     this.set('images', images)
     this.set('max', 3)
