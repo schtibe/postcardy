@@ -1,5 +1,8 @@
 /*jshint node:true*/
 /* global require, module */
+
+'use strict'
+
 let EmberApp = require('ember-cli/lib/broccoli/ember-app')
 
 module.exports = function(defaults) {
