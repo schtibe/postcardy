@@ -1,8 +1,6 @@
 import DS from 'ember-data'
 
-import Copyable from 'ember-cli-copyable'
-
-export default DS.Model.extend(Copyable, {
+export default DS.Model.extend({
   salutation : DS.attr('string'),
   company    : DS.attr('string'),
   givenName  : DS.attr('string'),

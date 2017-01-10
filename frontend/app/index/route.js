@@ -120,20 +120,6 @@ export default Ember.Route.extend({
       this.initController()
     },
     /**
-     * Create a new record when the users changes the address
-     *
-     * @returns {void}
-     */
-    async changeAddress() {
-      let model = this.controller.get('model')
-      let address = await model.get('recipient')
-
-      if (!address.get('isNew')) {
-        let newAddress = await address.copy()
-        this.controller.set('model.recipient', newAddress)
-      }
-    },
-    /**
      * Send the postcard
      * @returns {void}
      */
@@ -156,7 +142,10 @@ export default Ember.Route.extend({
       this.controller.set('resultClass', '')
       let recipient = await model.get('recipient')
 
-      if (recipient.get('isNew')) {
+      if (recipient.get('hasDirtyAttributes')) {
+        recipient = await this.get('store').createRecord(
+            'address', recipient.toJSON()
+        )
         recipient = await recipient.save()
         model.set('recipient', recipient)
       }
