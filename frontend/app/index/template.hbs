@@ -107,6 +107,12 @@
       {{result}}
      </div>
 
+     {{#unless model.image.id}}
+      <div class="alert alert_warning">
+        You have no image set
+      </div>
+     {{/unless}}
+
     </form>
   </div> {{!-- postcard end --}}
 

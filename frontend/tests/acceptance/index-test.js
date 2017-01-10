@@ -128,8 +128,8 @@ describe('Acceptance | index | send postcard', function() {
 
     $('.btn-primary').click()
     expect($('.alert')).to.be.visible
-    expect($('.alert').hasClass('alert_error')).to.be.true
-    expect($('.alert').text().trim()).to.equal('No image defined!')
+    expect($('.alert').hasClass('alert_warning')).to.be.true
+    expect($('.alert').text().trim()).to.equal('You have no image set')
   })
 
   it('Correctly sends a basic postcard with the default address', async function() {

@@ -130,16 +130,13 @@ export default Ember.Route.extend({
         return
       }
 
+      // TODO use validator
       if (!model.get('image.id')) {
-        this.controller.set('result', 'No image defined!')
-        this.controller.set('resultClass', 'error')
         return
       }
 
       // TODO all this necessary like this?
-      this.controller.set('result', '')
-      this.controller.set('isSending', true)
-      this.controller.set('resultClass', '')
+      this.controller.setSending()
       let recipient = await model.get('recipient')
 
       if (recipient.get('hasDirtyAttributes')) {
@@ -152,9 +149,7 @@ export default Ember.Route.extend({
 
       await model.save()
 
-      this.controller.set('isSending', false)
-      this.controller.set('result', 'Sent!')
-      this.controller.set('resultClass', 'success')
+      this.controller.setSuccess('Sent!')
     },
     /**
      * Action to be attached to the image slider
